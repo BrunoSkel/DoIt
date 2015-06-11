@@ -9,7 +9,7 @@
 //import Foundation
 import UIKit
 
-enum PointState {
+public enum PointState {
     case Locked
     case Unfinished
     case Finished
@@ -19,7 +19,7 @@ enum PointState {
     
     private let unfineshedChallengeImg = UIImage(named:"TimelineBtn_empty")
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
-    private let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
+    let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
     
     @IBInspectable var currentState : PointState = PointState.Locked {
         didSet {
@@ -30,6 +30,7 @@ enum PointState {
     override func layoutSubviews()
     {
         super.layoutSubviews()
+
         updateLayerProperties()
     }
     
