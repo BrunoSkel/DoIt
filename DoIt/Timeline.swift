@@ -8,17 +8,12 @@
 
 import UIKit
 
-<<<<<<< HEAD
-class Timeline: UIViewController {
-
-=======
 class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet var timelineScroll: UIScrollView!
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
     @IBOutlet var timelineAnchor: UIView!
     var pointsNumber: Int = 0
     
->>>>>>> Bruno-DoIt
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,10 +38,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         for var j=0; j<3; j++
         {
-            var newPoint = TimelinePoint()
+            var newPoint = TimelinePoint(nil)
             // newPoint = defaultTimelinebutton
             newPoint.frame = CGRectMake(x+70, y, 40, 40)
-            newPoint.currentState=PointState.Locked;
+            newPoint.changeState(PointState.Locked)
             self.view.addSubview(newPoint)
             
             x+=70;
@@ -56,12 +51,12 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         //And the unlocked points
         
         x=screenSize.width/2-20
-        for var i=0; i<pointsNumber; i++
+        for var i=pointsNumber; i>0; i--
         {
-            var newPoint = TimelinePoint()
+            var newPoint = TimelinePoint(nil)
            // newPoint = defaultTimelinebutton
             newPoint.frame = CGRectMake(x, y, 40, 40)
-            newPoint.currentState=PointState.Unfinished;
+            newPoint.changeState(PointState.Unfinished)
             self.view.addSubview(newPoint)
             newPoint.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             

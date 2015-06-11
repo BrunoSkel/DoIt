@@ -28,7 +28,7 @@ class TimelinePoint : UIButton {
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
     let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
     
-    private var currentState : PointState = PointState.Locked
+    public var currentState : PointState = PointState.Locked
     
     private var currentDay : Int!
     private var currentDate : NSDate!
@@ -39,28 +39,31 @@ class TimelinePoint : UIButton {
     private var shared : Int!
 
     // MARK: - Initializers and Setters
-    required init (coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    
+    init(_ coder: NSCoder? = nil) {
+        
+        if let coder = coder {
+            super.init(coder: coder)
+        } else {
+            super.init(frame: CGRectMake(0, 0, 0, 0))
+        }
         
         currentState = PointState.Locked
         currentDate = NSDate()
         currentDay = 0
         challenge = ["",""]
         shared = 0
+        
     }
     
-<<<<<<< HEAD
+    required convenience init(coder: NSCoder) {
+        self.init(coder)
+    }
+    
     func setInitialData (cDay : Int, cDate : NSDate, challengeA : String, challengeB : String) {
         currentDay = cDay
         currentDate = cDate
         challenge = [challengeA,challengeB]
-=======
-    override func layoutSubviews()
-    {
-        super.layoutSubviews()
-
-        updateLayerProperties()
->>>>>>> Bruno-DoIt
     }
     
     func setPicture (pic : UIImage) {
