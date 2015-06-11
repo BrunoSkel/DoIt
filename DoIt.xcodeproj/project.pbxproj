@@ -15,6 +15,7 @@
 		76B2B8B21B28560A00644DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */; };
 		76B2B8BE1B28560A00644DA1 /* DoItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8BD1B28560A00644DA1 /* DoItTests.swift */; };
 		76B2B8C91B28577400644DA1 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8C81B28577400644DA1 /* TimelinePoint.swift */; };
+		CBCE5F431B29CA9A005656FB /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCE5F421B29CA9A005656FB /* ServerConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		76B2B8BC1B28560A00644DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B2B8BD1B28560A00644DA1 /* DoItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoItTests.swift; sourceTree = "<group>"; };
 		76B2B8C81B28577400644DA1 /* TimelinePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
+		CBCE5F421B29CA9A005656FB /* ServerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		76B2B8C71B28574E00644DA1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CBCE5F421B29CA9A005656FB /* ServerConnection.swift */,
 				76B2B8C81B28577400644DA1 /* TimelinePoint.swift */,
 			);
 			name = Model;
@@ -229,6 +232,7 @@
 				76B2B8AA1B28560A00644DA1 /* Timeline.swift in Sources */,
 				1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */,
 				76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */,
+				CBCE5F431B29CA9A005656FB /* ServerConnection.swift in Sources */,
 				76B2B8C91B28577400644DA1 /* TimelinePoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
