@@ -10,6 +10,11 @@ import UIKit
 
 class PopOverController: UIViewController {
     
+    @IBOutlet weak var challenge1: UILabel!
+    
+    @IBOutlet weak var challenge2: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

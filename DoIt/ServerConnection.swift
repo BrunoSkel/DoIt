@@ -22,15 +22,15 @@ class ServerConnection{
         
     }
     
-    func GetChallenges(day : String, lang : String) -> String{
-        var sendData : NSString = "day=" + day + "&lang=" + lang
+    func GetChallenges(day : NSInteger, lang : NSInteger) -> NSArray{
+        var sendData : NSString = "day=" + day.description + "&lang=" + lang.description
         
-        return RequestPHP(sendData,phpFileName: "getChallenges.php", method: "POST")
+        return split(RequestPHP(sendData,phpFileName: "getChallenges.php", method: "POST")) {$0 == "#"}
     }
     
-    func ChallengeAccomplished(choice : String, day : String){
+    func ChallengeAccomplished(choice : NSInteger, day : NSInteger){
         if(userid != "-1"){
-            var sendData : NSString = "userid=" + userid + "&day=" + day + "&choice=" + choice
+            var sendData : NSString = "userid=" + userid + "&day=" + day.description + "&choice=" + choice.description
             
             var str = RequestPHP(sendData,phpFileName: "insertAccomplished.php", method: "POST")
             println(str)
