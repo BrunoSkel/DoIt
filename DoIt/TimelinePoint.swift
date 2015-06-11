@@ -9,7 +9,7 @@
 //import Foundation
 import UIKit
 
-enum PointState {
+public enum PointState {
     case Locked
     case Unfinished
     case Finished
@@ -26,7 +26,7 @@ class TimelinePoint : UIButton {
     
     private let unfineshedChallengeImg = UIImage(named:"TimelineBtn_empty")
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
-    private let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
+    let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
     
     private var currentState : PointState = PointState.Locked
     
@@ -49,10 +49,18 @@ class TimelinePoint : UIButton {
         shared = 0
     }
     
+<<<<<<< HEAD
     func setInitialData (cDay : Int, cDate : NSDate, challengeA : String, challengeB : String) {
         currentDay = cDay
         currentDate = cDate
         challenge = [challengeA,challengeB]
+=======
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+
+        updateLayerProperties()
+>>>>>>> Bruno-DoIt
     }
     
     func setPicture (pic : UIImage) {

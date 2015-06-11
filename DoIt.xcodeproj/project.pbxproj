@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1581065D1B29A5DE0012D383 /* PopOverController.swift */; };
 		76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8A71B28560A00644DA1 /* AppDelegate.swift */; };
 		76B2B8AA1B28560A00644DA1 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8A91B28560A00644DA1 /* Timeline.swift */; };
 		76B2B8AD1B28560A00644DA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8AB1B28560A00644DA1 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1581065D1B29A5DE0012D383 /* PopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverController.swift; sourceTree = "<group>"; };
 		76B2B8A21B28560A00644DA1 /* DoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B2B8A61B28560A00644DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B2B8A71B28560A00644DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				76B2B8A71B28560A00644DA1 /* AppDelegate.swift */,
 				76B2B8A91B28560A00644DA1 /* Timeline.swift */,
 				76B2B8AB1B28560A00644DA1 /* Main.storyboard */,
+				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
 				76B2B8AE1B28560A00644DA1 /* Images.xcassets */,
 				76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */,
 				76B2B8A51B28560A00644DA1 /* Supporting Files */,
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B2B8AA1B28560A00644DA1 /* Timeline.swift in Sources */,
+				1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */,
 				76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */,
 				76B2B8C91B28577400644DA1 /* TimelinePoint.swift in Sources */,
 			);
@@ -423,6 +427,7 @@
 				76B2B8C31B28560A00644DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76B2B8C41B28560A00644DA1 /* Build configuration list for PBXNativeTarget "DoItTests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +436,7 @@
 				76B2B8C61B28560A00644DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
