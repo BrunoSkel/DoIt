@@ -11,8 +11,8 @@ import UIKit
 class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
     @IBOutlet var timelineAnchor: UIView!
-    var timelineScroll:UIScrollView!;
-    var pointsNumber: CGFloat = 0
+    var timelineScroll:UIScrollView!
+    var pointsArray:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         let y:CGFloat=screenSize.height-60
         
         let scrollInitialX:CGFloat = self.view.frame.width
+        let pointsNumber = CGFloat(pointsArray.count)
         let scrollWidth = ((defaultTimelinebutton.frame.width+30)*(pointsNumber+3))
         timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
         var x:CGFloat=scrollWidth-defaultTimelinebutton.frame.width
@@ -53,6 +54,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             // newPoint = defaultTimelinebutton
             newPoint.frame = CGRectMake(x, 0, 45, 45)
             newPoint.changeState(PointState.Locked)
+            newPoint.UpdateDateLabel("",dayL: "")
             timelineScroll.addSubview(newPoint)
             
             x-=70;
@@ -62,7 +64,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         //And the unlocked points
         
         x=scrollWidth-40 - (70*3) //3=locked points number
-        for var i=pointsNumber; i>0; i--
+        for var i=pointsArray.count; i>0; i--
         {
             var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
            // newPoint = defaultTimelinebutton
@@ -71,7 +73,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             timelineScroll.addSubview(newPoint)
             newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             
+            let month:String = self.pointsArray[i-1][0] as! String
+            let day:String = self.pointsArray[i-1][1] as! String
+            newPoint.UpdateDateLabel(month, dayL: day)
             x-=70;
+            
+            if (i==pointsArray.count){
+                CenterTimelineAt(newPoint.button)
+            }
             
         }
         //=======================
@@ -101,14 +110,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverPresentation?.delegate = self
         popOverPresentation?.sourceView = timelineAnchor
         presentViewController(popOverController, animated: true, completion: nil)
-
-        CenterTimelineAt(sender)
         
         
         //Load a day challenge GetChallenges(dayNumber, langId)
         let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(1, lang: 0) //day 1, lang(0=en, 1=pt)
         popOverController.challenge1.text = dayChallengesArray[0] as? String
         popOverController.challenge2.text = dayChallengesArray[1] as? String
+
+        CenterTimelineAt(sender)
         
 
     }
@@ -124,7 +133,15 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     }
     
     func loadFakeData(){
-                pointsNumber = 15;
+        pointsArray=NSMutableArray()
+        
+        for var p=0; p<15; p++ {
+            self.pointsArray.insertObject(NSMutableArray(), atIndex: p)
+            self.pointsArray[p].insertObject("MAR", atIndex: 0)
+            self.pointsArray[p].insertObject("1", atIndex: 1)
+            self.pointsArray[p].insertObject("Draw Something", atIndex: 2)
+            self.pointsArray[p].insertObject("Exercise", atIndex: 3)
+        }
     }
     
 
