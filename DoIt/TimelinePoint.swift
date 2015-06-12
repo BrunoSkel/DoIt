@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 CoffeeTime. All rights reserved.
 //
 
-//import Foundation
 import UIKit
 
-public enum PointState {
-    case Locked
+public enum PointState : Int {
+    case Locked = 0
     case Unfinished
     case Finished
 }
@@ -46,30 +45,82 @@ class TimelinePoint : UIView {
     
 
     // MARK: - Initializers and Setters
-    
+    /*
     override init(frame: CGRect) {
+    super.init(frame: frame)
+    currentState = PointState.Locked
+    currentDate = NSDate()
+    currentDay = 0
+    challenge = ["",""]
+    shared = 0
+    self.hidden=false
+    println("Point Created")
+    //self.backgroundColor=UIColor.redColor()
+    self.createSubViews()
+    }
+    */
+    
+    init(frame: CGRect, cDay : Int, cDate : NSDate, chlg : [String]) {
         super.init(frame: frame)
-        currentState = PointState.Locked
-        currentDate = NSDate()
-        currentDay = 0
-        challenge = ["",""]
-        shared = 0
-        self.hidden=false
+        self.hidden = false
+        
+        currentDay = cDay
+        currentDate = cDate
+        challenge = chlg
+        selectedChallenge = -1
+        
         println("Point Created")
         //self.backgroundColor=UIColor.redColor()
         self.createSubViews()
     }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
-    func setInitialData (cDay : Int, cDate : NSDate, challengeA : String, challengeB : String) {
+    func setInitialData(cDay : Int, cDate : NSDate, chlg : [String]) {
         currentDay = cDay
         currentDate = cDate
-        challenge = [challengeA,challengeB]
-        
+        challenge = chlg
         selectedChallenge = -1
+    }
+    
+    required init(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+        
+        /*
+        let chCount = decoder.decodeObjectForKey("chCount") as! Int!
+        challenge = [String]()
+        
+        for index in 0 ..< chCount {
+            if var chlg = decoder.decodeObject() as? String {
+                challenge.append(chlg)
+            }
+        }
+        
+        currentState = PointState(rawValue: decoder.decodeObjectForKey("currentState") as! Int)!
+        currentDay = decoder.decodeObjectForKey("currentDay") as! Int!
+        currentDate = decoder.decodeObjectForKey("currentDate") as! NSDate!
+        challengeCompleteText = decoder.decodeObjectForKey("challengeTxt") as! String!
+        shared = decoder.decodeObjectForKey("shared") as! Int!
+        
+        let base64ImgString = decoder.decodeObjectForKey("base64ImgString") as! String!
+        let decodedData = NSData(base64EncodedString: base64ImgString, options: NSDataBase64DecodingOptions(rawValue: 0))
+        challengeCompletePicture = UIImage(data: decodedData!)
+        */
+    }
+    
+    override func encodeWithCoder(encoder: NSCoder){
+        encoder.encodeObject(self.challenge.count, forKey: "chCount")
+        for index in 0 ..< challenge.count {
+            encoder.encodeObject(challenge[index])
+        }
+        
+        encoder.encodeObject(self.currentState.rawValue, forKey: "currentState")
+        encoder.encodeObject(self.currentDay, forKey: "currentDay")
+        encoder.encodeObject(self.currentDate, forKey: "currentDate")
+        encoder.encodeObject(self.challengeCompleteText, forKey: "challengeTxt")
+        encoder.encodeObject(self.shared, forKey: "shared")
+        
+        let imageData = UIImagePNGRepresentation(self.challengeCompletePicture)
+        let base64ImgString = imageData.base64EncodedStringWithOptions(.allZeros)
+        encoder.encodeObject(base64ImgString, forKey: "base64ImgString")
     }
     
     func setPicture (pic : UIImage) {
