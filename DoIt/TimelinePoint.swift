@@ -32,15 +32,18 @@ class TimelinePoint : UIView {
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
     let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
     
-    public var currentState : PointState = PointState.Locked
+    private var currentState : PointState = PointState.Locked
     
     private var currentDay : Int!
     private var currentDate : NSDate!
     private var challenge : [String]!
+    private var selectedChallenge : Int!
     
     private var challengeCompletePicture : UIImage!
     private var challengeCompleteText : String!
     private var shared : Int!
+    
+    
 
     // MARK: - Initializers and Setters
     
@@ -65,6 +68,8 @@ class TimelinePoint : UIView {
         currentDay = cDay
         currentDate = cDate
         challenge = [challengeA,challengeB]
+        
+        selectedChallenge = -1
     }
     
     func setPicture (pic : UIImage) {
@@ -73,6 +78,10 @@ class TimelinePoint : UIView {
     
     func setText (txt : String) {
         challengeCompleteText = txt
+    }
+    
+    func setSelectedChallenge (id : Int) {
+        selectedChallenge = id
     }
     
     // MARK: - Getter Methods
@@ -94,6 +103,18 @@ class TimelinePoint : UIView {
     
     func getState () -> PointState {
         return currentState
+    }
+    
+    func getSelectedChallenge () -> Int {
+        return selectedChallenge
+    }
+    
+    func getDay () -> Int {
+        return currentDay
+    }
+    
+    func getDate () -> NSDate {
+        return currentDate
     }
     
     

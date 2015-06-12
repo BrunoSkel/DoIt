@@ -28,13 +28,20 @@ class ServerConnection{
         return split(RequestPHP(sendData,phpFileName: "getChallenges.php", method: "POST")) {$0 == "#"}
     }
     
-    func ChallengeAccomplished(choice : NSInteger, day : NSInteger){
+    func ChallengeAccomplished(choice : NSInteger, day : NSInteger)  -> NSArray{
         if(userid != "-1"){
             var sendData : NSString = "userid=" + userid + "&day=" + day.description + "&choice=" + choice.description
             
-            var str = RequestPHP(sendData,phpFileName: "insertAccomplished.php", method: "POST")
-            println(str)
+            return split(RequestPHP(sendData,phpFileName: "insertAccomplished.php", method: "POST")) {$0 == "#"}
         }
+        
+        return []
+    }
+    
+    func GetGlobalStats(day : NSInteger) -> NSArray{
+        var sendData : NSString = "day=" + day.description
+        
+        return split(RequestPHP(sendData,phpFileName: "getGlobalStat.php", method: "POST")) {$0 == "#"}
     }
     
     func RequestPHP(sendData : NSString, phpFileName : String, method: String) ->String{

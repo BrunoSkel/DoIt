@@ -14,6 +14,9 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     var timelineScroll:UIScrollView!
     var pointsArray:NSMutableArray!
     
+    var selectedTimelinePoint : TimelinePoint!
+    var isChangingChoice = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,14 +114,9 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverPresentation?.sourceView = timelineAnchor
         presentViewController(popOverController, animated: true, completion: nil)
         
-        
-        //Load a day challenge GetChallenges(dayNumber, langId)
-        let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(1, lang: 0) //day 1, lang(0=en, 1=pt)
-        popOverController.challenge1.text = dayChallengesArray[0] as? String
-        popOverController.challenge2.text = dayChallengesArray[1] as? String
-
         CenterTimelineAt(sender)
         
+        LoadPointData(popOverController,timelinePoint: sender.superview as! TimelinePoint)
 
     }
     
@@ -141,6 +139,39 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             self.pointsArray[p].insertObject("1", atIndex: 1)
             self.pointsArray[p].insertObject("Draw Something", atIndex: 2)
             self.pointsArray[p].insertObject("Exercise", atIndex: 3)
+        }
+    }
+
+    func LoadPointData(popOverController : PopOverController, timelinePoint : TimelinePoint){
+        
+        let dayNumber = 1 //TODO: Definir o numero de dia aqui quando o vetor estiver implementado
+        let langId = 0 //TODO: Definir o id do idioma aqui quando o suporte a multilinguas estiver implementado, 0=en 1=pt
+        
+        selectedTimelinePoint = timelinePoint
+
+        popOverController.timelineViewController = self
+        popOverController.timelinePoint = timelinePoint
+        
+
+        //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
+        let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(dayNumber, lang: langId)
+        
+        let strChallenge1 = dayChallengesArray[0] as? String
+        let strChallenge2 = dayChallengesArray[1] as? String
+        
+        //Init Data for timeline point
+        timelinePoint.setInitialData(dayNumber, cDate: NSDate(), challengeA: strChallenge1!, challengeB: strChallenge2!)
+        
+        popOverController.challenge1.setTitle(strChallenge1, forState: .Normal)
+        popOverController.challenge2.setTitle(strChallenge2, forState: .Normal)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "GoToGlobalStats"){
+            let globalStatsController = segue.destinationViewController as! GlobalStatsController
+            
+            globalStatsController.selectedTimelinePoint = selectedTimelinePoint
+            globalStatsController.changeChoice = isChangingChoice
         }
     }
     

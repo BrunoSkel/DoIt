@@ -15,6 +15,7 @@
 		76B2B8B21B28560A00644DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */; };
 		76B2B8BE1B28560A00644DA1 /* DoItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8BD1B28560A00644DA1 /* DoItTests.swift */; };
 		76B2B8C91B28577400644DA1 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8C81B28577400644DA1 /* TimelinePoint.swift */; };
+		CB0901BE1B2B2C2300EA4B44 /* GlobalStatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */; };
 		CBCE5F431B29CA9A005656FB /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCE5F421B29CA9A005656FB /* ServerConnection.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		76B2B8BC1B28560A00644DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B2B8BD1B28560A00644DA1 /* DoItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoItTests.swift; sourceTree = "<group>"; };
 		76B2B8C81B28577400644DA1 /* TimelinePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
+		CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalStatsController.swift; sourceTree = "<group>"; };
 		CBCE5F421B29CA9A005656FB /* ServerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 				76B2B8A91B28560A00644DA1 /* Timeline.swift */,
 				76B2B8AB1B28560A00644DA1 /* Main.storyboard */,
 				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
+				CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */,
 				76B2B8AE1B28560A00644DA1 /* Images.xcassets */,
 				76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */,
 				76B2B8A51B28560A00644DA1 /* Supporting Files */,
@@ -233,6 +236,7 @@
 				1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */,
 				76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */,
 				CBCE5F431B29CA9A005656FB /* ServerConnection.swift in Sources */,
+				CB0901BE1B2B2C2300EA4B44 /* GlobalStatsController.swift in Sources */,
 				76B2B8C91B28577400644DA1 /* TimelinePoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
