@@ -25,6 +25,8 @@ enum ShareState : Int {
 class TimelinePoint : UIView {
     
     var button:UIButton!
+    var month:UILabel!
+    var day:UILabel!
     
     private let unfineshedChallengeImg = UIImage(named:"TimelineBtn_empty")
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
@@ -136,6 +138,11 @@ class TimelinePoint : UIView {
         }
     }
     
+    func UpdateDateLabel(monthL : String, dayL : String){
+        day.text=dayL
+        month.text=monthL
+    }
+    
     // MARK: - Private Methods
     
     func createSubViews() {
@@ -150,6 +157,7 @@ class TimelinePoint : UIView {
         monthLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
         monthLabel.textAlignment = NSTextAlignment.Center
         monthLabel.text = "JAN"
+        month=monthLabel
         self.addSubview(monthLabel)
         //
         //
@@ -157,6 +165,7 @@ class TimelinePoint : UIView {
         dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
         dayLabel.textAlignment = NSTextAlignment.Center
         dayLabel.text = "30"
+        day=dayLabel
         self.addSubview(dayLabel)
         //
         self.hidden=false
