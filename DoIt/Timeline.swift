@@ -9,10 +9,10 @@
 import UIKit
 
 class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
-    @IBOutlet var timelineScroll: UIScrollView!
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
     @IBOutlet var timelineAnchor: UIView!
-    var pointsNumber: Int = 0
+    var timelineScroll:UIScrollView!;
+    var pointsNumber: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,41 +24,52 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     func loadTimeLineData(){
         //TODO: Pull data from the server. Loading fake data for now
         
-        //Supposed server array ordenation: currentday-yesterday-the day before-and it goes
+        //Supposed server array ordenation: 1stday-2ndday-3rdday and it goes
         
         loadFakeData()
         
         //Making points=========
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        var x:CGFloat=screenSize.width/2-20
+      //  var x:CGFloat=screenSize.width/2-20
         let y:CGFloat=screenSize.height-60
-        timelineScroll.frame = self.view.frame
-        timelineAnchor.frame = CGRectMake(x+20, y-80, 1, 1)
+        
+        let scrollInitialX:CGFloat = self.view.frame.width
+        let scrollWidth = ((defaultTimelinebutton.frame.width+30)*(pointsNumber+3))
+        timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
+        var x:CGFloat=scrollWidth-defaultTimelinebutton.frame.width
+        
+        timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
+        
+        
+        self.view.addSubview(timelineScroll)
+        
+        timelineAnchor.frame = CGRectMake(screenSize.width/2, y-40, 1, 1)
+        
         //Create Locked points
         
         for var j=0; j<3; j++
         {
-            var newPoint = TimelinePoint(nil)
+            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 45, 45))
             // newPoint = defaultTimelinebutton
-            newPoint.frame = CGRectMake(x+70, y, 40, 40)
+            newPoint.frame = CGRectMake(x, 0, 45, 45)
             newPoint.changeState(PointState.Locked)
-            self.view.addSubview(newPoint)
+            timelineScroll.addSubview(newPoint)
             
-            x+=70;
+            x-=70;
             
         }
         
         //And the unlocked points
         
-        x=screenSize.width/2-20
+        x=scrollWidth-40 - (70*3) //3=locked points number
         for var i=pointsNumber; i>0; i--
         {
-            var newPoint = TimelinePoint(nil)
+            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
            // newPoint = defaultTimelinebutton
-            newPoint.frame = CGRectMake(x, y, 40, 40)
+            newPoint.frame = CGRectMake(x, 0, 45, 45)
             newPoint.changeState(PointState.Unfinished)
-            self.view.addSubview(newPoint)
-            newPoint.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            timelineScroll.addSubview(newPoint)
+            newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             
             x-=70;
             
@@ -69,7 +80,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
     }
 
-    @IBAction func timelineGoLeft(sender: AnyObject) {
+    func CenterTimelineAt(sender: AnyObject) {
+        
+        //Not sure why it returns the position of the object 2 times ahead of it, so I reduce it by 2x
+        
+        let frame = sender.convertPoint(sender.frame.origin, toView: timelineScroll)
+        println(frame.x)
+        let newOffset = CGPointMake(frame.x-(70*2), 0);
+        timelineScroll.setContentOffset(newOffset, animated: true)
     }
     
     @IBAction func timelineButTouched(sender: AnyObject) {
@@ -83,6 +101,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverPresentation?.delegate = self
         popOverPresentation?.sourceView = timelineAnchor
         presentViewController(popOverController, animated: true, completion: nil)
+        CenterTimelineAt(sender)
     }
     
     //Popover Delegate

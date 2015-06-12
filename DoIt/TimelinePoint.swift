@@ -22,7 +22,9 @@ enum ShareState : Int {
 }
 
 
-class TimelinePoint : UIButton {
+class TimelinePoint : UIView {
+    
+    var button:UIButton!
     
     private let unfineshedChallengeImg = UIImage(named:"TimelineBtn_empty")
     private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
@@ -40,24 +42,21 @@ class TimelinePoint : UIButton {
 
     // MARK: - Initializers and Setters
     
-    init(_ coder: NSCoder? = nil) {
-        
-        if let coder = coder {
-            super.init(coder: coder)
-        } else {
-            super.init(frame: CGRectMake(0, 0, 0, 0))
-        }
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         currentState = PointState.Locked
         currentDate = NSDate()
         currentDay = 0
         challenge = ["",""]
         shared = 0
-        
+        self.hidden=false
+        println("Point Created")
+        //self.backgroundColor=UIColor.redColor()
+        self.createSubViews()
     }
-    
-    required convenience init(coder: NSCoder) {
-        self.init(coder)
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     func setInitialData (cDay : Int, cDate : NSDate, challengeA : String, challengeB : String) {
@@ -139,16 +138,40 @@ class TimelinePoint : UIButton {
     
     // MARK: - Private Methods
     
+    func createSubViews() {
+        //
+        var newButton = UIButton(frame: CGRectMake(0, 0, 45, 45))
+        newButton.setTitle("", forState: UIControlState.Normal)
+        newButton.setBackgroundImage(self.unfineshedChallengeImg, forState: UIControlState.Normal)
+        button=newButton
+        self.addSubview(newButton) // assuming you're in a view controller
+        //
+        var monthLabel = UILabel(frame: CGRectMake(6, 8, 33, 21))
+        monthLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
+        monthLabel.textAlignment = NSTextAlignment.Center
+        monthLabel.text = "JAN"
+        self.addSubview(monthLabel)
+        //
+        //
+        var dayLabel = UILabel(frame: CGRectMake(6, 19, 33, 21))
+        dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
+        dayLabel.textAlignment = NSTextAlignment.Center
+        dayLabel.text = "30"
+        self.addSubview(dayLabel)
+        //
+        self.hidden=false
+    }
+    
     private func updateState () {
         switch currentState {
         case PointState.Locked:
-            setImage(self.lockedChallengeImg, forState: UIControlState.Normal)
+            button.setImage(self.lockedChallengeImg, forState: UIControlState.Normal)
         case PointState.Unfinished:
-            setImage(self.unfineshedChallengeImg, forState: .Normal)
+            button.setImage(self.unfineshedChallengeImg, forState: .Normal)
         case PointState.Finished:
-            setImage(self.finishedChallengeImg, forState: .Normal)
+            button.setImage(self.finishedChallengeImg, forState: .Normal)
         default:
-            setImage(self.lockedChallengeImg, forState: .Normal)
+            button.setImage(self.lockedChallengeImg, forState: .Normal)
         }
     }
     
