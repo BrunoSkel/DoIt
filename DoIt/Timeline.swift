@@ -101,7 +101,16 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverPresentation?.delegate = self
         popOverPresentation?.sourceView = timelineAnchor
         presentViewController(popOverController, animated: true, completion: nil)
+
         CenterTimelineAt(sender)
+        
+        
+        //Load a day challenge GetChallenges(dayNumber, langId)
+        let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(1, lang: 0) //day 1, lang(0=en, 1=pt)
+        popOverController.challenge1.text = dayChallengesArray[0] as? String
+        popOverController.challenge2.text = dayChallengesArray[1] as? String
+        
+
     }
     
     //Popover Delegate
