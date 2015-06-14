@@ -115,9 +115,9 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverPresentation?.sourceView = timelineAnchor
         presentViewController(popOverController, animated: true, completion: nil)
         
-        CenterTimelineAt(sender)
-        
         LoadPointData(popOverController,timelinePoint: sender.superview as! TimelinePoint)
+        
+                CenterTimelineAt(sender)
 
     }
     

@@ -27,9 +27,9 @@ class TimelinePoint : UIView {
     var month:UILabel!
     var day:UILabel!
     
-    private let unfineshedChallengeImg = UIImage(named:"TimelineBtn_empty")
-    private let finishedChallengeImg = UIImage(named:"TimelineBtn_filled")
-    let lockedChallengeImg = UIImage(named:"TimelineBtn_inactive")
+    private let unfineshedChallengeImg = UIImage(named:"inactive")
+    private let finishedChallengeImg = UIImage(named:"done")
+    let lockedChallengeImg = UIImage(named:"inactive")
     
     private var currentState : PointState = PointState.Locked
     
@@ -229,6 +229,7 @@ class TimelinePoint : UIView {
         monthLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
         monthLabel.textAlignment = NSTextAlignment.Center
         monthLabel.text = "JAN"
+        monthLabel.textColor=UIColor.whiteColor()
         month=monthLabel
         self.addSubview(monthLabel)
         //
@@ -237,6 +238,7 @@ class TimelinePoint : UIView {
         dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
         dayLabel.textAlignment = NSTextAlignment.Center
         dayLabel.text = "30"
+        dayLabel.textColor=UIColor.whiteColor()
         day=dayLabel
         self.addSubview(dayLabel)
         //
