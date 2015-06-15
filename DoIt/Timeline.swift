@@ -117,7 +117,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         LoadPointData(popOverController,timelinePoint: sender.superview as! TimelinePoint)
         
-                CenterTimelineAt(sender)
+        CenterTimelineAt(sender)
 
     }
     
@@ -141,19 +141,26 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             self.pointsArray[p].insertObject("Draw Something", atIndex: 2)
             self.pointsArray[p].insertObject("Exercise", atIndex: 3)
         }
+        
+        //TO DO: Montar timeline com vetor de TimelinePoint a partir do dia atual do servidor
+        
+        //GetServerCurrentDayNumberAndDate tem retorno duplo, um NSInteger e um NSDate
+        var (currentDayNumber : NSInteger,currentDate : NSDate) = ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate()
+        println(currentDayNumber)
+        println(currentDate)
     }
 
     func LoadPointData(popOverController : PopOverController, timelinePoint : TimelinePoint){
         
         let dayNumber = 1 //TODO: Definir o numero de dia aqui quando o vetor estiver implementado
         let langId = 0 //TODO: Definir o id do idioma aqui quando o suporte a multilinguas estiver implementado, 0=en 1=pt
-        
+        let pointDate : NSDate = NSDate() //TODO: Definir o NSDate do botao aqui quando o vetor estiver implementado
+
         selectedTimelinePoint = timelinePoint
 
         popOverController.timelineViewController = self
         popOverController.timelinePoint = timelinePoint
         
-
         //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
         let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(dayNumber, lang: langId) as! [String]
         
@@ -161,7 +168,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         let strChallenge2 = dayChallengesArray[1]
         
         //Init Data for timeline point
-        timelinePoint.setInitialData(dayNumber, cDate: NSDate(), chlg: dayChallengesArray)
+        timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
         
         popOverController.challenge1.setTitle(strChallenge1, forState: .Normal)
         popOverController.challenge2.setTitle(strChallenge2, forState: .Normal)

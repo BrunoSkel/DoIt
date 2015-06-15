@@ -44,6 +44,34 @@ class ServerConnection{
         return split(RequestPHP(sendData,phpFileName: "getGlobalStat.php", method: "POST")) {$0 == "#"}
     }
     
+    func GetServerCurrentDayNumberAndDate() -> (NSInteger,NSDate){
+        let days = split(RequestPHP("",phpFileName: "getDay0_1.php", method: "POST")) {$0 == "#"}
+
+        let utcDateFormatter = NSDateFormatter()
+        utcDateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        utcDateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        utcDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        //Get Date 0 in GMT
+        let serverStringDate0 = days[0]
+        let date0 = utcDateFormatter.dateFromString(serverStringDate0)
+        
+        //Get Current Date in GMT
+        let serverStringCurrentDate = days[1]
+        let currentDate = utcDateFormatter.dateFromString(serverStringCurrentDate)
+        
+        //Calculates Current Day number
+        var secondsBetween : NSTimeInterval = currentDate!.timeIntervalSinceDate(date0!)
+        var currentDayNumber = Int(secondsBetween / 86400);
+        
+        let localDateFormatter = NSDateFormatter()
+        localDateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        localDateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
+        let localDateString = localDateFormatter.stringFromDate(currentDate!)
+        
+        return (currentDayNumber,currentDate!)
+    }
+    
     func RequestPHP(sendData : NSString, phpFileName : String, method: String) ->String{
         var request : NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: serverPath + phpFileName)!)
         request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
