@@ -88,6 +88,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             
             if (i==pointsArray.count){
                 CenterTimelineAt(newPoint.button)
+                self.timelineButTouched(newPoint.button)
             }
             
         }
@@ -98,8 +99,6 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     }
 
     func CenterTimelineAt(sender: AnyObject) {
-        
-        //Not sure why it returns the position of the object 2 times ahead of it, so I reduce it by 2x
         
         let frame = sender.convertPoint(sender.frame.origin, toView: timelineScroll)
         println(frame.x)
