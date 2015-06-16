@@ -157,7 +157,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpC-Tw-Nie">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpC-Tw-Nie">
                                 <rect key="frame" x="10" y="117" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Bi5-gm-anc"/>
@@ -187,6 +187,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fBR-CR-7jH">
+                                <rect key="frame" x="150" y="257" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -202,6 +205,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Global Stats" id="CeS-3C-Kcp"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="fBR-CR-7jH" id="ODK-d3-RsW"/>
+                        <outlet property="chartContainerView" destination="BpC-Tw-Nie" id="yUE-Ta-Xzx"/>
                         <outlet property="lbDate" destination="eSo-cO-3tO" id="BRR-JY-vNW"/>
                         <outlet property="lbMyChoice" destination="juD-hL-GKc" id="DTd-Tv-yNe"/>
                     </connections>
@@ -322,6 +327,9 @@
                                     <action selector="CloseButton:" destination="AWQ-BY-8Am" eventType="touchUpInside" id="e1P-cL-RQF"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aov-KA-GqU">
+                                <rect key="frame" x="138" y="179" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="aCB-rq-SD1" secondAttribute="trailing" constant="-9" id="6WY-yY-Q9C"/>
@@ -341,8 +349,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="aov-KA-GqU" id="AxL-c7-A4d"/>
                         <outlet property="challenge1" destination="IEQ-kx-klk" id="c5A-Oy-RO8"/>
                         <outlet property="challenge2" destination="HSF-yW-OtO" id="D4N-eV-KE1"/>
+                        <outlet property="lbOr" destination="RRl-Ir-qjD" id="lwU-h6-bpo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyM-Bg-4un" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -423,7 +433,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjo-1B-ytA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="-120"/>
+            <point key="canvasLocation" x="1028" y="-236"/>
         </scene>
     </scenes>
     <resources>

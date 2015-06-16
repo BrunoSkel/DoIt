@@ -10,6 +10,10 @@ import UIKit
 import QuartzCore
 
 class GlobalStatsController: UIViewController {
+    
+    @IBOutlet weak var chartContainerView: UIView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var lbDayNumber: UILabel!
     @IBOutlet weak var lbDate: UILabel!
@@ -26,6 +30,46 @@ class GlobalStatsController: UIViewController {
     
     var changeChoice = false
     
+    func UpdateGlobalStats(arrayFromServer : NSArray){
+        let selectedChallenge = selectedTimelinePoint.getSelectedChallenge()
+        
+        let nAccomplished1 = (arrayFromServer[0] as! NSString).integerValue
+        let nAccomplished2 = (arrayFromServer[1] as! NSString).integerValue
+        
+        let total = Double(nAccomplished1+nAccomplished2)
+        let percentage1 = Double(nAccomplished1) / total * 100
+        let percentage2 = Double(nAccomplished2) / total * 100
+        
+        self.ShowLoadingIndicator(false)
+        
+//        self.lbPercentageChallenge1.text = String(format:"%.1f", percentage1) + " %"
+//        self.lbPercentageChallenge2.text = String(format:"%.1f", percentage2) + " %"
+//        
+//        self.lbChallenge1.text = self.selectedTimelinePoint.getChallenges()[0]
+//        self.lbChallenge2.text = self.selectedTimelinePoint.getChallenges()[1]
+        
+        if(selectedChallenge == -1){
+            self.lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+        }else{
+            self.lbMyChoice.text = self.selectedTimelinePoint.getChallenges()[selectedChallenge]
+        }
+        
+
+        var pieController:PieChartWindow = self.childViewControllers[0] as! PieChartWindow
+        pieController.firstSlice = percentage1 as NSNumber
+        pieController.secondSlice = percentage2 as NSNumber
+
+        pieController.challenge1Label.text = selectedTimelinePoint.getChallenges()[0]
+        pieController.challenge2Label.text = selectedTimelinePoint.getChallenges()[1]
+
+        if(selectedChallenge == -1){
+            //lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+        }else{
+            lbMyChoice.text = selectedTimelinePoint.getChallenges()[selectedChallenge]
+        }
+
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -36,35 +80,68 @@ class GlobalStatsController: UIViewController {
         lbDate.text = formatter.stringFromDate(selectedTimelinePoint.getDate())
         
         let selectedChallenge = selectedTimelinePoint.getSelectedChallenge()
+
         
         var globalStats = []
         if(changeChoice){
-            globalStats = ServerConnection.sharedInstance.ChallengeAccomplished(selectedChallenge, day: selectedTimelinePoint.getDay())
+            
+            ServerConnection.sharedInstance.ChallengeAccomplished(selectedChallenge, day: selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
+                
+                globalStats = arrayFromServer
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    self.UpdateGlobalStats(arrayFromServer)
+                }
+            })
+
         }else{
-            globalStats = ServerConnection.sharedInstance.GetGlobalStats(selectedTimelinePoint.getDay())
+
+            ServerConnection.sharedInstance.GetGlobalStats(selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
+                
+                dispatch_async(dispatch_get_main_queue()){
+                   self.UpdateGlobalStats(arrayFromServer)
+                }
+            })
+
         }
         
-        let nAccomplished1 = (globalStats[0] as! NSString).integerValue
-        let nAccomplished2 = (globalStats[1] as! NSString).integerValue
+//        let nAccomplished1 = (globalStats[0] as! NSString).integerValue
+//        let nAccomplished2 = (globalStats[1] as! NSString).integerValue
+//        
+//        let total = Double(nAccomplished1+nAccomplished2)
+//        let percentage1 = Double(nAccomplished1) / total * 100
+//        let percentage2 = Double(nAccomplished2) / total * 100
+//        
+//        var pieController:PieChartWindow = self.childViewControllers[0] as! PieChartWindow
+//        pieController.firstSlice = percentage1 as NSNumber
+//        pieController.secondSlice = percentage2 as NSNumber
+//        
+//        pieController.challenge1Label.text = selectedTimelinePoint.getChallenges()[0]
+//        pieController.challenge2Label.text = selectedTimelinePoint.getChallenges()[1]
+//        
+//        if(selectedChallenge == -1){
+//            //lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+//        }else{
+//            lbMyChoice.text = selectedTimelinePoint.getChallenges()[selectedChallenge]
+//        }
+    }
+    
+    func ShowLoadingIndicator(bool : Bool){
+//        lbDayNumber.hidden = bool
+        lbDate.hidden = bool
+//        lbPercentageChallenge1.hidden = bool
+//        lbPercentageChallenge2.hidden = bool
+//        lbChallenge1.hidden = bool
+//        lbChallenge2.hidden = bool
+        lbMyChoice.hidden = bool
+        chartContainerView.hidden = bool
         
-        let total = Double(nAccomplished1+nAccomplished2)
-        let percentage1 = Double(nAccomplished1) / total * 100
-        let percentage2 = Double(nAccomplished2) / total * 100
+        activityIndicator.hidden = !bool
         
-        //lbPercentageChallenge1.text = String(format:"%.1f", percentage1) + " %"
-        //lbPercentageChallenge2.text = String(format:"%.1f", percentage2) + " %"
-        
-        var pieController:PieChartWindow = self.childViewControllers[0] as! PieChartWindow
-        pieController.firstSlice = percentage1 as NSNumber
-        pieController.secondSlice = percentage2 as NSNumber
-        
-        pieController.challenge1Label.text = selectedTimelinePoint.getChallenges()[0]
-        pieController.challenge2Label.text = selectedTimelinePoint.getChallenges()[1]
-        
-        if(selectedChallenge == -1){
-            //lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+        if(bool){
+            activityIndicator.startAnimating()
         }else{
-            lbMyChoice.text = selectedTimelinePoint.getChallenges()[selectedChallenge]
+            activityIndicator.stopAnimating()
         }
     }
 }

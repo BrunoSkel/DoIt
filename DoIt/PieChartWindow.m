@@ -34,6 +34,23 @@
 {
     [super viewWillAppear:animated];
    // NSLog(@"I showed up");
+}
+
+- (void)viewDidUnload
+{
+    [self setPieChartRight:nil];
+    [self setPercentageLabel:nil];
+    [self setSelectedSliceLabel:nil];
+    [self setIndexOfSlices:nil];
+    [self setNumOfSlices:nil];
+    [self setDownArrow:nil];
+    [super viewDidUnload];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     self.slices = [NSMutableArray arrayWithCapacity:2];
     
     [_slices addObject:_firstSlice];
@@ -54,22 +71,7 @@
     
     //rotate up arrow
     self.downArrow.transform = CGAffineTransformMakeRotation(M_PI);
-}
-
-- (void)viewDidUnload
-{
-    [self setPieChartRight:nil];
-    [self setPercentageLabel:nil];
-    [self setSelectedSliceLabel:nil];
-    [self setIndexOfSlices:nil];
-    [self setNumOfSlices:nil];
-    [self setDownArrow:nil];
-    [super viewDidUnload];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    
     [self.pieChartRight reloadData];
 }
 
