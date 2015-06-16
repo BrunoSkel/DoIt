@@ -170,11 +170,11 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         }
         
         //TO DO: Montar timeline com vetor de TimelinePoint a partir do dia atual do servidor
-        
         //GetServerCurrentDayNumberAndDate tem retorno duplo, um NSInteger e um NSDate
-        var (currentDayNumber : NSInteger,currentDate : NSDate) = ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate()
-        println(currentDayNumber)
-        println(currentDate)
+        ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
+            println("currentDayNumber = \(currentDayNumber)")
+            println("currentDate = \(currentDate)")
+        })
     }
 
     func LoadPointData(popOverController : PopOverController, timelinePoint : TimelinePoint){
@@ -188,17 +188,32 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         popOverController.timelineViewController = self
         popOverController.timelinePoint = timelinePoint
         
-        //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
-        let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(dayNumber, lang: langId) as! [String]
+        popOverController.ShowLoadingIndicator(true)
+        ServerConnection.sharedInstance.GetChallenges(dayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
+            let dayChallengesArray = arrayFromServer as! [String]
+            
+            //Init Data for timeline point
+            timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
+            
+            dispatch_async(dispatch_get_main_queue()){
+                popOverController.ShowLoadingIndicator(false)
+                popOverController.challenge1.setTitle(dayChallengesArray[0], forState: .Normal)
+                popOverController.challenge2.setTitle(dayChallengesArray[1], forState: .Normal)
+            }
+            
+        })
         
-        let strChallenge1 = dayChallengesArray[0]
-        let strChallenge2 = dayChallengesArray[1]
-        
-        //Init Data for timeline point
-        timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
-        
-        popOverController.challenge1.setTitle(strChallenge1, forState: .Normal)
-        popOverController.challenge2.setTitle(strChallenge2, forState: .Normal)
+//        //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
+//        let dayChallengesArray = ServerConnection.sharedInstance.GetChallenges(dayNumber, lang: langId) as! [String]
+//        
+//        let strChallenge1 = dayChallengesArray[0]
+//        let strChallenge2 = dayChallengesArray[1]
+//        
+//        //Init Data for timeline point
+//        timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
+//        
+//        popOverController.challenge1.setTitle(strChallenge1, forState: .Normal)
+//        popOverController.challenge2.setTitle(strChallenge2, forState: .Normal)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

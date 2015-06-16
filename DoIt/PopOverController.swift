@@ -10,9 +10,13 @@ import UIKit
 
 class PopOverController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var challenge1: UIButton!
 
     @IBOutlet weak var challenge2: UIButton!
+    
+    @IBOutlet weak var lbOr: UILabel!
     
     var timelineViewController : Timeline!
     
@@ -26,6 +30,20 @@ class PopOverController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func ShowLoadingIndicator(bool : Bool){
+        lbOr.hidden = bool
+        challenge1.hidden = bool
+        challenge2.hidden = bool
+        
+        activityIndicator.hidden = !bool
+        
+        if(bool){
+            activityIndicator.startAnimating()
+        }else{
+            activityIndicator.stopAnimating()
+        }
     }
 
     
