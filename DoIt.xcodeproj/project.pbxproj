@@ -40,6 +40,8 @@
 		151AB9971B2EEABB00017492 /* PieChartWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartWindow.m; sourceTree = "<group>"; };
 		151AB9991B2EF13900017492 /* DoIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoIt-Bridging-Header.h"; sourceTree = "<group>"; };
 		1581065D1B29A5DE0012D383 /* PopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverController.swift; sourceTree = "<group>"; };
+		15A286BD1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.strings; sourceTree = "<group>"; };
+		15A286BE1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		76B2B8A21B28560A00644DA1 /* DoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B2B8A61B28560A00644DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B2B8A71B28560A00644DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				76B2B8AC1B28560A00644DA1 /* Base */,
+				15A286BD1B304A270062A910 /* pt */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				76B2B8B11B28560A00644DA1 /* Base */,
+				15A286BE1B304A270062A910 /* pt */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

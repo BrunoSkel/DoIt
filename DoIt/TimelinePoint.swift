@@ -31,7 +31,7 @@ class TimelinePoint : UIView {
     private let finishedChallengeImg = UIImage(named:"done")
     let lockedChallengeImg = UIImage(named:"inactive")
     
-    private var currentState : PointState = PointState.Locked
+    public var currentState : PointState = PointState.Locked
     
     private var currentDay : Int!
     private var currentDate : NSDate!
