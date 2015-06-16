@@ -62,7 +62,7 @@ class GlobalStatsController: UIViewController {
         pieController.challenge2Label.text = selectedTimelinePoint.getChallenges()[1]
         
         if(selectedChallenge == -1){
-            lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+            //lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
         }else{
             lbMyChoice.text = selectedTimelinePoint.getChallenges()[selectedChallenge]
         }

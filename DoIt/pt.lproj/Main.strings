@@ -1,0 +1,63 @@
+
+/* Class = "UILabel"; text = "JAN"; ObjectID = "B4C-dk-0Ae"; */
+"B4C-dk-0Ae.text" = "JAN";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "BTd-gE-NGU"; */
+"BTd-gE-NGU.text" = "00:00:00";
+
+/* Class = "UINavigationItem"; title = "Global Stats"; ObjectID = "CeS-3C-Kcp"; */
+"CeS-3C-Kcp.title" = "Dados Globais";
+
+/* Class = "UILabel"; text = "#Challenge_2"; ObjectID = "FWj-Xj-KWA"; */
+"FWj-Xj-KWA.text" = "#Challenge_2";
+
+/* Class = "UIButton"; normalTitle = "#DO_2 (tag=1)"; ObjectID = "HSF-yW-OtO"; */
+"HSF-yW-OtO.normalTitle" = "#DO_2 (tag=1)";
+
+/* Class = "UIBarButtonItem"; title = "Timeline"; ObjectID = "IAe-0w-suV"; */
+"IAe-0w-suV.title" = "Menu";
+
+/* Class = "UIButton"; normalTitle = "#DO_1 (tag=0)"; ObjectID = "IEQ-kx-klk"; */
+"IEQ-kx-klk.normalTitle" = "#DO_1 (tag=0)";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "KlT-lk-6J3"; */
+"KlT-lk-6J3.text" = "0";
+
+/* Class = "UILabel"; text = "Challenges complete:"; ObjectID = "Lpx-DB-O7n"; */
+"Lpx-DB-O7n.text" = "Desafios completos:";
+
+/* Class = "UILabel"; text = "New challenge in:"; ObjectID = "PPG-Dy-x1H"; */
+"PPG-Dy-x1H.text" = "Novo desafio em:";
+
+/* Class = "UILabel"; text = "OR"; ObjectID = "RRl-Ir-qjD"; */
+"RRl-Ir-qjD.text" = "OU";
+
+/* Class = "UILabel"; text = "#Challenge_1"; ObjectID = "S0b-z3-QpM"; */
+"S0b-z3-QpM.text" = "#Challenge_1";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "WCH-HM-ikk"; */
+"WCH-HM-ikk.text" = "30";
+
+/* Class = "UIButton"; normalTitle = "X"; ObjectID = "aCB-rq-SD1"; */
+"aCB-rq-SD1.normalTitle" = "X";
+
+/* Class = "UILabel"; text = "12/06/2015"; ObjectID = "eSo-cO-3tO"; */
+"eSo-cO-3tO.text" = "12/06/2015";
+
+/* Class = "UIButton"; normalTitle = "See what others did"; ObjectID = "hT3-My-Df0"; */
+"hT3-My-Df0.normalTitle" = "Veja o que outros fizeram";
+
+/* Class = "UILabel"; text = "My accomplished challenge:"; ObjectID = "jOZ-aW-Xoa"; */
+"jOZ-aW-Xoa.text" = "Meu desafio:";
+
+/* Class = "UILabel"; text = "Say hello to 3 people you've never seen"; ObjectID = "juD-hL-GKc"; */
+"juD-hL-GKc.text" = "Você ainda não completou o desafio desse dia.";
+
+/* Class = "UILabel"; text = "Today, you could..."; ObjectID = "lob-wg-o1b"; */
+"lob-wg-o1b.text" = "Hoje, você podia...";
+
+/* Class = "UINavigationItem"; title = "Daily Challenge"; ObjectID = "mJD-Zv-w1n"; */
+"mJD-Zv-w1n.title" = "Desafio Diário";
+
+/* Class = "UILabel"; text = "Touch a day to see it's challenge."; ObjectID = "tJn-hm-0XF"; */
+"tJn-hm-0XF.text" = "Toque em um dia para ver seu desafio.";

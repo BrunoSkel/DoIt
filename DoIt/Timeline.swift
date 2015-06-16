@@ -10,17 +10,22 @@ import UIKit
 
 class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
+    var timelineView: UIView!
     var timelineScroll:UIScrollView!
     var timelineAnchor: UIView!
     var pointsArray:NSMutableArray!
     
     var selectedTimelinePoint : TimelinePoint!
     var isChangingChoice = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.setTranslatesAutoresizingMaskIntoConstraints(true)
+        timelineView=UIView(frame: self.view.frame)
+        
+        timelineView.setTranslatesAutoresizingMaskIntoConstraints(true)
+        
+        self.view.addSubview(timelineView)
+        
         loadTimeLineData()
         
     }
@@ -46,12 +51,12 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
         
         
-        self.view.addSubview(timelineScroll)
+        timelineView.addSubview(timelineScroll)
         
         
-        timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-40, 1, 1))
+        timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-10, 1, 1))
         
-        self.view.addSubview(timelineAnchor)
+        timelineView.addSubview(timelineAnchor)
         
         //Create Locked points
         
@@ -77,7 +82,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
             // newPoint = defaultTimelinebutton
             newPoint.frame = CGRectMake(x, 0, 45, 45)
-            newPoint.changeState(PointState.Unfinished)
+            //newPoint.changeState(PointState.Unfinished)
             timelineScroll.addSubview(newPoint)
             newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             
@@ -88,7 +93,12 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             
             if (i==pointsArray.count){
                 CenterTimelineAt(newPoint.button)
-                self.timelineButTouched(newPoint.button)
+                if (newPoint.currentState==PointState.Finished){
+                }
+                //!= not working?
+                else{
+                   self.timelineButTouched(newPoint.button)
+                }
             }
             
         }
