@@ -10,16 +10,17 @@ import UIKit
 
 class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
-    @IBOutlet var timelineAnchor: UIView!
     var timelineScroll:UIScrollView!
+    var timelineAnchor: UIView!
     var pointsArray:NSMutableArray!
     
     var selectedTimelinePoint : TimelinePoint!
     var isChangingChoice = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.setTranslatesAutoresizingMaskIntoConstraints(true)
         loadTimeLineData()
         
     }
@@ -47,7 +48,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         self.view.addSubview(timelineScroll)
         
-        timelineAnchor.frame = CGRectMake(screenSize.width/2, y-40, 1, 1)
+        
+        timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-40, 1, 1))
+        
+        self.view.addSubview(timelineAnchor)
         
         //Create Locked points
         
@@ -99,7 +103,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         let frame = sender.convertPoint(sender.frame.origin, toView: timelineScroll)
         println(frame.x)
-        let newOffset = CGPointMake(frame.x-(70*2), 0);
+        let newOffset = CGPointMake(frame.x-(self.view.frame.size.width / 2)+22, 0);
         timelineScroll.setContentOffset(newOffset, animated: true)
     }
     
