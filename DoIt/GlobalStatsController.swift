@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class GlobalStatsController: UIViewController {
 
@@ -28,7 +29,7 @@ class GlobalStatsController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        lbDayNumber.text = "Day " + String(selectedTimelinePoint.getDay())
+        //lbDayNumber.text = "Day " + String(selectedTimelinePoint.getDay())
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -50,12 +51,15 @@ class GlobalStatsController: UIViewController {
         let percentage1 = Double(nAccomplished1) / total * 100
         let percentage2 = Double(nAccomplished2) / total * 100
         
-        lbPercentageChallenge1.text = String(format:"%.1f", percentage1) + " %"
-        lbPercentageChallenge2.text = String(format:"%.1f", percentage2) + " %"
+        //lbPercentageChallenge1.text = String(format:"%.1f", percentage1) + " %"
+        //lbPercentageChallenge2.text = String(format:"%.1f", percentage2) + " %"
         
+        var pieController:PieChartWindow = self.childViewControllers[0] as! PieChartWindow
+        pieController.firstSlice = percentage1 as NSNumber
+        pieController.secondSlice = percentage2 as NSNumber
         
-        lbChallenge1.text = selectedTimelinePoint.getChallenges()[0]
-        lbChallenge2.text = selectedTimelinePoint.getChallenges()[1]
+        pieController.challenge1Label.text = selectedTimelinePoint.getChallenges()[0]
+        pieController.challenge2Label.text = selectedTimelinePoint.getChallenges()[1]
         
         if(selectedChallenge == -1){
             lbMyChoice.text = "You didn't accomplished any challenges yet on this day"

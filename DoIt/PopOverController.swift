@@ -44,5 +44,10 @@ class PopOverController: UIViewController {
         dismissViewControllerAnimated(false, completion: nil)
         timelineViewController.performSegueWithIdentifier("GoToGlobalStats", sender: timelineViewController)
     }
-    
+
+    @IBAction func CloseButton(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
 }
