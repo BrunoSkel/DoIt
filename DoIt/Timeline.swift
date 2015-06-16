@@ -15,6 +15,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     var timelineAnchor: UIView!
     var pointsArray:NSMutableArray!
     
+    @IBOutlet var doneChallengesLabel: UILabel!
+    
+    var doneChallengesInt:Int=0
+    
     var selectedTimelinePoint : TimelinePoint!
     var isChangingChoice = false
     override func viewDidLoad() {
@@ -38,6 +42,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         loadFakeData()
         
         //Making points=========
+        doneChallengesInt=0
         let screenSize: CGRect = UIScreen.mainScreen().bounds
       //  var x:CGFloat=screenSize.width/2-20
         let y:CGFloat=screenSize.height-60
@@ -91,6 +96,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             newPoint.UpdateDateLabel(month, dayL: day)
             x-=70;
             
+            //Update complete challenge's number
+            if (newPoint.currentState==PointState.Finished){
+                
+                doneChallengesInt++
+                
+            }
+            
+            //Center onto the current day's button
             if (i==pointsArray.count){
                 CenterTimelineAt(newPoint.button)
                 if (newPoint.currentState==PointState.Finished){
@@ -105,6 +118,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         //=======================
         
         defaultTimelinebutton.hidden=true
+        doneChallengesLabel.text = String(doneChallengesInt)
         
     }
 
