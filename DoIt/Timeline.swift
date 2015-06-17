@@ -147,7 +147,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         //Show PopOver
         let popOverController=self.storyboard!.instantiateViewControllerWithIdentifier("PopOverDefault") as! PopOverController
         popOverController.modalPresentationStyle = .Popover
-        popOverController.preferredContentSize = CGSizeMake(300, 400)
+        popOverController.preferredContentSize = CGSizeMake(self.view.frame.size.width-16, 400)
         
         let popOverPresentation = popOverController.popoverPresentationController
         popOverPresentation?.permittedArrowDirections = .Any
@@ -258,9 +258,9 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
             
             dispatch_async(dispatch_get_main_queue()){
-                popOverController.ShowLoadingIndicator(false)
                 popOverController.challenge1.setTitle(dayChallengesArray[0], forState: .Normal)
                 popOverController.challenge2.setTitle(dayChallengesArray[1], forState: .Normal)
+                popOverController.ShowLoadingIndicator(false)
             }
             
         })

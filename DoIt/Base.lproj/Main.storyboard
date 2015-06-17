@@ -188,7 +188,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fBR-CR-7jH">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fBR-CR-7jH">
                                 <rect key="frame" x="150" y="257" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -197,8 +197,10 @@
                             <constraint firstItem="eSo-cO-3tO" firstAttribute="top" secondItem="SHv-dL-Jq6" secondAttribute="bottom" constant="6" id="C9M-4P-MEq"/>
                             <constraint firstAttribute="centerX" secondItem="jOZ-aW-Xoa" secondAttribute="centerX" constant="-0.5" id="CZM-aa-npZ"/>
                             <constraint firstItem="juD-hL-GKc" firstAttribute="top" secondItem="jOZ-aW-Xoa" secondAttribute="bottom" constant="8" id="G7O-VQ-8zx"/>
+                            <constraint firstAttribute="centerY" secondItem="fBR-CR-7jH" secondAttribute="centerY" constant="17" id="Tuo-fc-PPw"/>
                             <constraint firstAttribute="centerX" secondItem="eSo-cO-3tO" secondAttribute="centerX" id="Wd2-rE-Xt2"/>
                             <constraint firstItem="BpC-Tw-Nie" firstAttribute="top" secondItem="eSo-cO-3tO" secondAttribute="bottom" constant="6" id="eiC-yw-4fm"/>
+                            <constraint firstAttribute="centerX" secondItem="fBR-CR-7jH" secondAttribute="centerX" id="fca-4F-S7Z"/>
                             <constraint firstItem="KxX-uT-VmN" firstAttribute="top" secondItem="juD-hL-GKc" secondAttribute="bottom" constant="20" id="h7O-FJ-31o"/>
                             <constraint firstAttribute="centerX" secondItem="BpC-Tw-Nie" secondAttribute="centerX" id="qSN-RX-UXI"/>
                             <constraint firstAttribute="centerX" secondItem="juD-hL-GKc" secondAttribute="centerX" id="zMr-pT-R9c"/>
@@ -234,7 +236,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="IEQ-kx-klk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="IEQ-kx-klk" userLabel="DO_1">
                                 <rect key="frame" x="7" y="93" width="286" height="66"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -242,7 +244,7 @@
                                     <constraint firstAttribute="height" constant="66" id="qCL-5t-2DB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <state key="normal" title="#DO_1 (tag=0)">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -255,7 +257,7 @@
                                     <action selector="ChallengeAccomplished:" destination="AWQ-BY-8Am" eventType="touchUpInside" id="hra-1D-0rq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HSF-yW-OtO">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HSF-yW-OtO" userLabel="DO_2">
                                 <rect key="frame" x="7" y="219" width="286" height="66"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -263,7 +265,7 @@
                                     <constraint firstAttribute="width" constant="286" id="W8O-1A-hD6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <state key="normal" title="#DO_2 (tag=1)">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -277,11 +279,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hT3-My-Df0">
-                                <rect key="frame" x="116" y="329" width="177" height="43"/>
+                                <rect key="frame" x="88" y="329" width="205" height="43"/>
                                 <color key="backgroundColor" red="0.24313725489999999" green="0.5568627451" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="4hF-S6-XuA"/>
-                                    <constraint firstAttribute="width" constant="177" id="oka-xn-nnm"/>
+                                    <constraint firstAttribute="width" constant="205" id="oka-xn-nnm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <state key="normal" title="See what others did">
@@ -328,11 +330,12 @@
                                     <action selector="CloseButton:" destination="AWQ-BY-8Am" eventType="touchUpInside" id="e1P-cL-RQF"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aov-KA-GqU">
-                                <rect key="frame" x="138" y="179" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aov-KA-GqU">
+                                <rect key="frame" x="142" y="179" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="RRl-Ir-qjD" firstAttribute="centerY" secondItem="aov-KA-GqU" secondAttribute="centerY" constant="0.5" id="4y1-ey-N6d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aCB-rq-SD1" secondAttribute="trailing" constant="-9" id="6WY-yY-Q9C"/>
                             <constraint firstAttribute="centerY" secondItem="RRl-Ir-qjD" secondAttribute="centerY" constant="10.5" id="7lR-sq-ETD"/>
                             <constraint firstItem="aCB-rq-SD1" firstAttribute="top" secondItem="QLh-Ng-Ych" secondAttribute="bottom" constant="13" id="DRK-R2-L6h"/>
@@ -341,6 +344,7 @@
                             <constraint firstAttribute="centerX" secondItem="IEQ-kx-klk" secondAttribute="centerX" id="NKe-fc-ne7"/>
                             <constraint firstItem="OtW-EP-kYv" firstAttribute="top" secondItem="hT3-My-Df0" secondAttribute="bottom" constant="28" id="QMY-Cf-ety"/>
                             <constraint firstAttribute="centerX" secondItem="RRl-Ir-qjD" secondAttribute="centerX" id="S04-1C-5ar"/>
+                            <constraint firstItem="RRl-Ir-qjD" firstAttribute="centerX" secondItem="aov-KA-GqU" secondAttribute="centerX" constant="-2" id="TeU-7v-o7X"/>
                             <constraint firstItem="lob-wg-o1b" firstAttribute="top" secondItem="QLh-Ng-Ych" secondAttribute="bottom" constant="32" id="Z24-Jg-1jn"/>
                             <constraint firstAttribute="centerX" secondItem="HSF-yW-OtO" secondAttribute="centerX" id="jE9-pe-7A1"/>
                             <constraint firstAttribute="centerX" secondItem="lob-wg-o1b" secondAttribute="centerX" id="l3z-6Y-aDH"/>
