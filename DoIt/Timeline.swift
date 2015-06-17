@@ -17,10 +17,17 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     
     @IBOutlet var doneChallengesLabel: UILabel!
     
+    @IBOutlet var timerLabel: UILabel!
+    
     var doneChallengesInt:Int=0
     
     var selectedTimelinePoint : TimelinePoint!
     var isChangingChoice = false
+    
+    var timerhour:Int = 0
+    var timerminute:Int = 0
+    var timersecond:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +47,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         //Supposed server array ordenation: 1stday-2ndday-3rdday and it goes
         
         loadFakeData()
-        
+        setupTimer()
         //Making points=========
         doneChallengesInt=0
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -156,6 +163,46 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupTimer(){
+        //Getting the NSDate for the end of the current day
+        
+        var (currentDayNumber : NSInteger,currentDate : NSDate) = ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate()
+        println(currentDate)
+        let cal = NSCalendar.currentCalendar()
+        let components = cal.components((.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond), fromDate: currentDate)
+        
+        let hour = components.hour
+        let minute = components.minute
+        let second = components.second
+        
+        timerhour=23-hour
+        timerminute=59-minute
+        timersecond=59-second
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+        
+    }
+        
+    func timerUpdate() {
+        timersecond--
+        if (timersecond==0){
+            timersecond=59
+            timerminute--
+            if (timerminute==0){
+                timerminute=59
+                timerhour--
+                if (timerhour==0){
+                    timerhour=23
+                    timerminute=59
+                    timersecond=59
+                }
+            }
+        }
+        
+        timerLabel.text=NSString(format: "%02d:%02d:%02d", timerhour,timerminute,timersecond) as String
+        
     }
     
     func loadFakeData(){

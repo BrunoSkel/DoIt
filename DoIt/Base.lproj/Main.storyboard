@@ -128,6 +128,7 @@
                     <connections>
                         <outlet property="defaultTimelinebutton" destination="Mqf-nE-2P5" id="yRX-I7-VvE"/>
                         <outlet property="doneChallengesLabel" destination="KlT-lk-6J3" id="waT-cd-PdI"/>
+                        <outlet property="timerLabel" destination="BTd-gE-NGU" id="AqQ-ps-qk9"/>
                         <segue destination="gUA-KJ-t03" kind="push" identifier="GoToGlobalStats" id="tiv-Ld-Ojb"/>
                     </connections>
                 </viewController>
