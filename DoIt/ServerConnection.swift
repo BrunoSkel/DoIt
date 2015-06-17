@@ -69,6 +69,14 @@ class ServerConnection{
         localDateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
         let localDateString = localDateFormatter.stringFromDate(currentDate!)
         
+        // TEST for future date
+        /*
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let futureDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: 2, toDate: currentDate!, options: nil)
+        let futureDay = currentDayNumber + 2
+        return (futureDay,futureDate!)
+        */
+        
         return (currentDayNumber,currentDate!)
     }
     
