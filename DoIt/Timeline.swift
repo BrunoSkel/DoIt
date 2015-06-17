@@ -168,7 +168,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     func setupTimer(){
         //Getting the NSDate for the end of the current day
         
-        var (currentDayNumber : NSInteger,currentDate : NSDate) = ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate()
+        ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
         println(currentDate)
         let cal = NSCalendar.currentCalendar()
         let components = cal.components((.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond), fromDate: currentDate)
@@ -177,15 +177,20 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         let minute = components.minute
         let second = components.second
         
-        timerhour=23-hour
-        timerminute=59-minute
-        timersecond=59-second
+        self.timerhour=23-hour
+        self.timerminute=59-minute
+        self.timersecond=59-second
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+        dispatch_async(dispatch_get_main_queue()){
+            var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+        }
+        
+        })
         
     }
         
     func timerUpdate() {
+
         timersecond--
         if (timersecond==0){
             timersecond=59
