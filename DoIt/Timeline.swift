@@ -28,6 +28,8 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     var timerminute:Int = 0
     var timersecond:Int = 0
     
+    var timer = NSTimer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,13 +43,17 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTimer()
+    }
+    
     func loadTimeLineData(){
         //TODO: Pull data from the server. Loading fake data for now
         
         //Supposed server array ordenation: 1stday-2ndday-3rdday and it goes
         
         loadFakeData()
-        setupTimer()
         //Making points=========
         doneChallengesInt=0
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -165,6 +171,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        timer.invalidate()
+    }
+    
     func setupTimer(){
         //Getting the NSDate for the end of the current day
         
@@ -182,7 +192,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         self.timersecond=59-second
         
         dispatch_async(dispatch_get_main_queue()){
-            var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
         }
         
         })
@@ -192,13 +202,13 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     func timerUpdate() {
 
         timersecond--
-        if (timersecond==0){
+        if (timersecond<=0){
             timersecond=59
             timerminute--
-            if (timerminute==0){
+            if (timerminute<=0){
                 timerminute=59
                 timerhour--
-                if (timerhour==0){
+                if (timerhour<=0){
                     timerhour=23
                     timerminute=59
                     timersecond=59

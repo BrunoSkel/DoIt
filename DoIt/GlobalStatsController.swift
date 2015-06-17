@@ -49,7 +49,8 @@ class GlobalStatsController: UIViewController {
 //        self.lbChallenge2.text = self.selectedTimelinePoint.getChallenges()[1]
         
         if(selectedChallenge == -1){
-            self.lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
+            //This is done on the storyboard now.
+            //self.lbMyChoice.text = "You didn't accomplished any challenges yet on this day"
         }else{
             self.lbMyChoice.text = self.selectedTimelinePoint.getChallenges()[selectedChallenge]
         }
