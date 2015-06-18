@@ -401,7 +401,7 @@
 				INFOPLIST_FILE = DoIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Bruno/Desktop/BEPiD Xcodes/DoIt/DoIt/DoIt-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DoIt/DoIt-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -412,7 +412,7 @@
 				INFOPLIST_FILE = DoIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Bruno/Desktop/BEPiD Xcodes/DoIt/DoIt/DoIt-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DoIt/DoIt-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -431,6 +431,7 @@
 				INFOPLIST_FILE = DoItTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DoIt/DoIt-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoIt.app/DoIt";
 			};
 			name = Debug;
@@ -446,6 +447,7 @@
 				INFOPLIST_FILE = DoItTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DoIt/DoIt-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoIt.app/DoIt";
 			};
 			name = Release;
