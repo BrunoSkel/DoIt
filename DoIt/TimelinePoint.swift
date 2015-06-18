@@ -29,9 +29,9 @@ class TimelinePoint : UIView {
     
     private let unfineshedChallengeImg = UIImage(named:"active")
     private let finishedChallengeImg = UIImage(named:"done")
-    let lockedChallengeImg = UIImage(named:"inactive")
+    private let lockedChallengeImg = UIImage(named:"inactive")
     
-    public var currentState : PointState = PointState.Locked
+    private var currentState : PointState = PointState.Locked
     
     private var currentDay : Int!
     private var currentDate : NSDate!
@@ -107,6 +107,7 @@ class TimelinePoint : UIView {
     }
     
     override func encodeWithCoder(encoder: NSCoder){
+        /*
         encoder.encodeObject(self.challenge.count, forKey: "chCount")
         for index in 0 ..< challenge.count {
             encoder.encodeObject(challenge[index])
@@ -121,6 +122,7 @@ class TimelinePoint : UIView {
         let imageData = UIImagePNGRepresentation(self.challengeCompletePicture)
         let base64ImgString = imageData.base64EncodedStringWithOptions(.allZeros)
         encoder.encodeObject(base64ImgString, forKey: "base64ImgString")
+        */
     }
     
     func setPicture (pic : UIImage) {
@@ -215,8 +217,6 @@ class TimelinePoint : UIView {
        // month.text=monthL
     }
     
-    // MARK: - Private Methods
-    
     func createSubViews() {
         //
         var newButton = UIButton(frame: CGRectMake(0, 0, 75, 50))
@@ -244,6 +244,9 @@ class TimelinePoint : UIView {
         //
         self.hidden=false
     }
+    
+    
+    // MARK: - Private Methods
     
     private func updateState () {
         switch currentState {
