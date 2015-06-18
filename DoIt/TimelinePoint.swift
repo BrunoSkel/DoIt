@@ -212,7 +212,7 @@ class TimelinePoint : UIView {
         }
     }
     
-    func UpdateDateLabel(monthL : String, dayL : String){
+    func UpdateDateLabel(dayL : String){
         day.text=dayL
        // month.text=monthL
     }
@@ -252,7 +252,7 @@ class TimelinePoint : UIView {
         switch currentState {
         case PointState.Locked:
             button.setImage(self.lockedChallengeImg, forState: UIControlState.Normal)
-            day.textColor=UIColor.blackColor()
+            day.textColor=UIColor.whiteColor()
         case PointState.Unfinished:
             button.setImage(self.unfineshedChallengeImg, forState: .Normal)
             day.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
