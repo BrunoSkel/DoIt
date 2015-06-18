@@ -45,6 +45,13 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController!.navigationBar.tintColor=UIColor.whiteColor()
+        self.navigationController!.navigationBar.barTintColor=UIColor(red: 115/255, green: 198/255, blue: 248/255, alpha: 1.0)
+        
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        
         setupTimer()
     }
     
@@ -62,7 +69,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         let scrollInitialX:CGFloat = self.view.frame.width
         let pointsNumber = CGFloat(pointsArray.count)
-        let scrollWidth = ((defaultTimelinebutton.frame.width+30)*(pointsNumber+3))
+        let scrollWidth = ((defaultTimelinebutton.frame.width)*(pointsNumber+3))
         timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
         var x:CGFloat=scrollWidth-defaultTimelinebutton.frame.width
         
@@ -80,34 +87,34 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         for var j=0; j<3; j++
         {
-            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 45, 45), cDay: j, cDate: NSDate(), chlg: ["",""])
+            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: NSDate(), chlg: ["",""])
             // newPoint = defaultTimelinebutton
-            newPoint.frame = CGRectMake(x, 0, 45, 45)
+            newPoint.frame = CGRectMake(x, 11, 75, 50)
             newPoint.changeState(PointState.Locked)
             newPoint.UpdateDateLabel("",dayL: "")
             timelineScroll.addSubview(newPoint)
             
-            x-=70;
+            x-=75;
             
         }
         
         //And the unlocked points
         
-        x=scrollWidth-40 - (70*3) //3=locked points number
+        x=scrollWidth-75 - (75*3) //8=locked points number
         for var i=pointsArray.count; i>0; i--
         {
-            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45), cDay: i, cDate: NSDate(), chlg: ["",""])
+            var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: i, cDate: NSDate(), chlg: ["",""])
             //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
             // newPoint = defaultTimelinebutton
-            newPoint.frame = CGRectMake(x, 0, 45, 45)
+            newPoint.frame = CGRectMake(x, 11, 75, 50)
             //newPoint.changeState(PointState.Unfinished)
             timelineScroll.addSubview(newPoint)
             newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             
             let month:String = self.pointsArray[i-1][0] as! String
             let day:String = self.pointsArray[i-1][1] as! String
-            newPoint.UpdateDateLabel(month, dayL: day)
-            x-=70;
+            newPoint.UpdateDateLabel(month, dayL: String(i))
+            x-=75;
             
             //Update complete challenge's number
             if (newPoint.currentState==PointState.Finished){
@@ -139,7 +146,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         let frame = sender.convertPoint(sender.frame.origin, toView: timelineScroll)
         println(frame.x)
-        let newOffset = CGPointMake(frame.x-(self.view.frame.size.width / 2)+22, 0);
+        let newOffset = CGPointMake(frame.x-(self.view.frame.size.width / 2)+35, 0);
         timelineScroll.setContentOffset(newOffset, animated: true)
     }
     
