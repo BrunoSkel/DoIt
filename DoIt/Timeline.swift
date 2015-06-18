@@ -111,9 +111,17 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                 //And the unlocked points
                 
                 x=scrollWidth-75 - (75*3) //5=locked points number
+                
+                println(self.pointsArray2.count)
+                
                 for var i=self.pointsArray2.count-1; i>=0; i--
                 {
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: i, cDate: NSDate(), chlg: ["",""])
+                    
+                    let date : NSDate = self.pointsArray2[i][2] as! NSDate
+                    let calendar: NSCalendar = NSCalendar.currentCalendar()
+                    let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    
+                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: self.pointsArray2[i][1] as! Int, cDate: date, chlg: self.pointsArray2[i][3] as! [String])
                     //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x, 11, 75, 50)
@@ -123,7 +131,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                     
                     //let month:String = self.pointsArray2[i-1][0] as! String
                     //let day:String = self.pointsArray2[i-1][1] as! String
-                    newPoint.UpdateDateLabel(" ", dayL: String(i))
+                    newPoint.UpdateDateLabel(" ", dayL: String(self.pointsArray2[i][1] as! Int))
                     x-=75;
                     
                     //Update complete challenge's number

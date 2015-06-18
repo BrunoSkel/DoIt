@@ -37,8 +37,14 @@ class GlobalStatsController: UIViewController {
         let nAccomplished2 = (arrayFromServer[1] as! NSString).integerValue
         
         let total = Double(nAccomplished1+nAccomplished2)
-        let percentage1 = Double(nAccomplished1) / total * 100
-        let percentage2 = Double(nAccomplished2) / total * 100
+        
+        var percentage1:Double = 1
+        var percentage2:Double = 1
+        
+        if (total != 0){
+         percentage1 = Double(nAccomplished1) / total * 100
+         percentage2 = Double(nAccomplished2) / total * 100
+        }
         
         self.ShowLoadingIndicator(false)
         
