@@ -72,26 +72,26 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         loadData({
             dispatch_async(dispatch_get_main_queue()){
                 //Making points=========
-                doneChallengesInt=0
+                self.doneChallengesInt=0
                 let screenSize: CGRect = UIScreen.mainScreen().bounds
                 //  var x:CGFloat=screenSize.width/2-20
                 let y:CGFloat=screenSize.height-60
                 
                 let scrollInitialX:CGFloat = self.view.frame.width
-                let pointsNumber = CGFloat(pointsArray.count)
-                let scrollWidth = ((defaultTimelinebutton.frame.width)*(pointsNumber+3))
-                timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
-                var x:CGFloat=scrollWidth-defaultTimelinebutton.frame.width
+                let pointsNumber = CGFloat(self.pointsArray2.count)
+                let scrollWidth = ((self.defaultTimelinebutton.frame.width)*(pointsNumber+3))
+                self.timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
+                var x:CGFloat=scrollWidth-self.defaultTimelinebutton.frame.width
                 
-                timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
-                
-                
-                timelineView.addSubview(timelineScroll)
+                self.timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
                 
                 
-                timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-10, 1, 1))
+                self.timelineView.addSubview(self.timelineScroll)
                 
-                timelineView.addSubview(timelineAnchor)
+                
+                self.timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-10, 1, 1))
+                
+                self.timelineView.addSubview(self.timelineAnchor)
                 
                 //Create Locked points
                 
@@ -102,7 +102,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                     newPoint.frame = CGRectMake(x+150, 11, 75, 50)
                     newPoint.changeState(PointState.Locked)
                     newPoint.UpdateDateLabel("",dayL: "")
-                    timelineScroll.addSubview(newPoint)
+                    self.timelineScroll.addSubview(newPoint)
                     
                     x-=75;
                     
@@ -111,19 +111,19 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                 //And the unlocked points
                 
                 x=scrollWidth-75 - (75*3) //5=locked points number
-                for var i=pointsArray.count; i>0; i--
+                for var i=self.pointsArray2.count-1; i>=0; i--
                 {
                     var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: i, cDate: NSDate(), chlg: ["",""])
                     //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x, 11, 75, 50)
                     //newPoint.changeState(PointState.Finished)
-                    timelineScroll.addSubview(newPoint)
+                    self.timelineScroll.addSubview(newPoint)
                     newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
                     
-                    let month:String = self.pointsArray[i-1][0] as! String
-                    let day:String = self.pointsArray[i-1][1] as! String
-                    newPoint.UpdateDateLabel(month, dayL: String(i))
+                    //let month:String = self.pointsArray2[i-1][0] as! String
+                    //let day:String = self.pointsArray2[i-1][1] as! String
+                    newPoint.UpdateDateLabel(" ", dayL: String(i))
                     x-=75;
                     
                     //Update complete challenge's number
