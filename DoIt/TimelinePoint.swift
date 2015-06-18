@@ -27,7 +27,7 @@ class TimelinePoint : UIView {
     var month:UILabel!
     var day:UILabel!
     
-    private let unfineshedChallengeImg = UIImage(named:"inactive")
+    private let unfineshedChallengeImg = UIImage(named:"active")
     private let finishedChallengeImg = UIImage(named:"done")
     let lockedChallengeImg = UIImage(named:"inactive")
     
@@ -212,33 +212,33 @@ class TimelinePoint : UIView {
     
     func UpdateDateLabel(monthL : String, dayL : String){
         day.text=dayL
-        month.text=monthL
+       // month.text=monthL
     }
     
     // MARK: - Private Methods
     
     func createSubViews() {
         //
-        var newButton = UIButton(frame: CGRectMake(0, 0, 45, 45))
+        var newButton = UIButton(frame: CGRectMake(0, 0, 75, 50))
         newButton.setTitle("", forState: UIControlState.Normal)
         newButton.setBackgroundImage(self.unfineshedChallengeImg, forState: UIControlState.Normal)
         button=newButton
         self.addSubview(newButton) // assuming you're in a view controller
         //
-        var monthLabel = UILabel(frame: CGRectMake(6, 8, 33, 21))
-        monthLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
-        monthLabel.textAlignment = NSTextAlignment.Center
-        monthLabel.text = "JAN"
-        monthLabel.textColor=UIColor.whiteColor()
-        month=monthLabel
-        self.addSubview(monthLabel)
+       // var monthLabel = UILabel(frame: CGRectMake(6, 8, 33, 21))
+       // monthLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
+       // monthLabel.textAlignment = NSTextAlignment.Center
+       // monthLabel.text = "JAN"
+       // monthLabel.textColor=UIColor.blackColor()
+       // month=monthLabel
+       // self.addSubview(monthLabel)
         //
         //
-        var dayLabel = UILabel(frame: CGRectMake(6, 19, 33, 21))
-        dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 12.0)
+        var dayLabel = UILabel(frame: CGRectMake(0, 0, 75, 50))
+        dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         dayLabel.textAlignment = NSTextAlignment.Center
         dayLabel.text = "30"
-        dayLabel.textColor=UIColor.whiteColor()
+        dayLabel.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         day=dayLabel
         self.addSubview(dayLabel)
         //
@@ -249,10 +249,13 @@ class TimelinePoint : UIView {
         switch currentState {
         case PointState.Locked:
             button.setImage(self.lockedChallengeImg, forState: UIControlState.Normal)
+            day.textColor=UIColor.blackColor()
         case PointState.Unfinished:
             button.setImage(self.unfineshedChallengeImg, forState: .Normal)
+            day.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         case PointState.Finished:
             button.setImage(self.finishedChallengeImg, forState: .Normal)
+            day.textColor=UIColor.whiteColor()
         default:
             button.setImage(self.lockedChallengeImg, forState: .Normal)
         }

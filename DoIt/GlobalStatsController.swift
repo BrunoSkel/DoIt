@@ -74,6 +74,8 @@ class GlobalStatsController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+        
         //lbDayNumber.text = "Day " + String(selectedTimelinePoint.getDay())
         
         let formatter = NSDateFormatter()

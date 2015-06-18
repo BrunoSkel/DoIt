@@ -58,7 +58,7 @@
     
     [self.pieChartRight setDelegate:self];
     [self.pieChartRight setDataSource:self];
-    [self.pieChartRight setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:24]];
+    [self.pieChartRight setLabelFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]];
     [self.pieChartRight setPieCenter:CGPointMake(120, 120)];
     [self.pieChartRight setShowPercentage:NO];
     [self.pieChartRight setLabelColor:[UIColor whiteColor]];
@@ -66,8 +66,8 @@
     [self.percentageLabel.layer setCornerRadius:90];
     
     self.sliceColors =[NSArray arrayWithObjects:
-                       [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1],
-                       [UIColor colorWithRed:0/255.0 green:0/255.0 blue:255/255.0 alpha:1],nil];
+                       [UIColor colorWithRed:84/255.0 green:179/255.0 blue:40/255.0 alpha:1],
+                       [UIColor colorWithRed:246/255.0 green:4/255.0 blue:49/255.0 alpha:1],nil];
     
     //rotate up arrow
     self.downArrow.transform = CGAffineTransformMakeRotation(M_PI);
