@@ -238,7 +238,7 @@ class TimelinePoint : UIView {
         dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         dayLabel.textAlignment = NSTextAlignment.Center
         dayLabel.text = "30"
-        dayLabel.textColor=UIColor.blackColor()
+        dayLabel.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         day=dayLabel
         self.addSubview(dayLabel)
         //
@@ -252,7 +252,7 @@ class TimelinePoint : UIView {
             day.textColor=UIColor.blackColor()
         case PointState.Unfinished:
             button.setImage(self.unfineshedChallengeImg, forState: .Normal)
-            day.textColor=UIColor.blackColor()
+            day.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         case PointState.Finished:
             button.setImage(self.finishedChallengeImg, forState: .Normal)
             day.textColor=UIColor.whiteColor()

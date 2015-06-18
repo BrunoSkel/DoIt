@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="TdH-dN-VlV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background-01" translatesAutoresizingMaskIntoConstraints="NO" id="TdH-dN-VlV">
                                 <rect key="frame" x="0.0" y="5" width="320" height="563"/>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ksc-ci-eDT" userLabel="defaultTimelineButton" customClass="TimelinePoint" customModule="DoIt" customModuleProvider="target">
@@ -102,7 +102,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.16149791452594373" green="0.30786433157908077" blue="0.30819917929292928" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="tJn-hm-0XF" secondAttribute="centerX" constant="-0.5" id="8sT-z5-TzL"/>
                             <constraint firstItem="g5V-tS-wz3" firstAttribute="top" secondItem="An1-OY-NL1" secondAttribute="bottom" constant="-1" id="CYd-jn-uCY"/>
@@ -123,7 +123,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Daily Challenge" id="mJD-Zv-w1n">
-                        <barButtonItem key="backBarButtonItem" title="Timeline" id="IAe-0w-suV"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="Foz-Wo-Jkn"/>
                     </navigationItem>
                     <connections>
                         <outlet property="defaultTimelinebutton" destination="Mqf-nE-2P5" id="yRX-I7-VvE"/>
@@ -192,7 +192,7 @@
                                 <rect key="frame" x="150" y="257" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eSo-cO-3tO" firstAttribute="top" secondItem="SHv-dL-Jq6" secondAttribute="bottom" constant="6" id="C9M-4P-MEq"/>
                             <constraint firstAttribute="centerX" secondItem="jOZ-aW-Xoa" secondAttribute="centerX" constant="-0.5" id="CZM-aa-npZ"/>
@@ -407,7 +407,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaI-HM-iZ6" userLabel="Red">
                                 <rect key="frame" x="30" y="241" width="15" height="15"/>
-                                <color key="backgroundColor" red="1" green="0.0041567848889642045" blue="0.036720861158668683" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.32941176470588235" green="0.70196078431372544" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -415,7 +415,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulc-ar-h8I" userLabel="Blue">
                                 <rect key="frame" x="30" y="262" width="15" height="15"/>
-                                <color key="backgroundColor" red="0.0" green="0.25" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.015686274509803921" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -428,7 +428,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <connections>
@@ -444,7 +444,7 @@
     </scenes>
     <resources>
         <image name="active" width="150" height="101"/>
-        <image name="background" width="1900" height="1280"/>
+        <image name="background-01" width="2560" height="1920"/>
         <image name="timelinebg" width="700" height="125"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

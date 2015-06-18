@@ -30,6 +30,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     
     var timer = NSTimer()
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,8 +50,10 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
         self.navigationController!.navigationBar.tintColor=UIColor.whiteColor()
-        self.navigationController!.navigationBar.barTintColor=UIColor(red: 115/255, green: 198/255, blue: 248/255, alpha: 1.0)
+        self.navigationController!.navigationBar.barTintColor=UIColor(red: 98/255, green: 185/255, blue: 246/255, alpha: 1.0)
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
@@ -85,11 +91,11 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         //Create Locked points
         
-        for var j=0; j<3; j++
+        for var j=0; j<5; j++
         {
             var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: NSDate(), chlg: ["",""])
             // newPoint = defaultTimelinebutton
-            newPoint.frame = CGRectMake(x, 11, 75, 50)
+            newPoint.frame = CGRectMake(x+150, 11, 75, 50)
             newPoint.changeState(PointState.Locked)
             newPoint.UpdateDateLabel("",dayL: "")
             timelineScroll.addSubview(newPoint)
@@ -100,14 +106,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         
         //And the unlocked points
         
-        x=scrollWidth-75 - (75*3) //8=locked points number
+        x=scrollWidth-75 - (75*3) //5=locked points number
         for var i=pointsArray.count; i>0; i--
         {
             var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: i, cDate: NSDate(), chlg: ["",""])
             //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
             // newPoint = defaultTimelinebutton
             newPoint.frame = CGRectMake(x, 11, 75, 50)
-            //newPoint.changeState(PointState.Unfinished)
+            //newPoint.changeState(PointState.Finished)
             timelineScroll.addSubview(newPoint)
             newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
             
@@ -153,6 +159,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBAction func timelineButTouched(sender: AnyObject) {
         //Show PopOver
         let popOverController=self.storyboard!.instantiateViewControllerWithIdentifier("PopOverDefault") as! PopOverController
+        popOverController.view.backgroundColor=UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         popOverController.modalPresentationStyle = .Popover
         popOverController.preferredContentSize = CGSizeMake(self.view.frame.size.width-16, 400)
         
@@ -179,6 +186,13 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     }
     
     override func viewWillDisappear(animated: Bool) {
+        
+        self.navigationController!.navigationBar.tintColor=UIColor(red: 98/255, green: 185/255, blue: 246/255, alpha: 1.0)
+        self.navigationController!.navigationBar.barTintColor=UIColor.whiteColor()
+        
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor(red: 98/255, green: 185/255, blue: 246/255, alpha: 1.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        
         timer.invalidate()
     }
     
