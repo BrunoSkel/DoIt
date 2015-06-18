@@ -85,7 +85,7 @@ class ServerConnection{
             let calendar : NSCalendar = NSCalendar.currentCalendar()
             let futureDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: 2, toDate: currentDate!, options: nil)
             let futureDay = currentDayNumber + 2
-            return (futureDay,futureDate!)
+            completionHandler(futureDay,futureDate!)
             */
             
             completionHandler(currentDayNumber,currentDate!)
