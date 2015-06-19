@@ -106,11 +106,17 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 var numLockedPoints = 5
                 for var j=0; j<numLockedPoints; j++
                 {
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: NSDate(), chlg: ["",""], cState: PointState.Locked,selChlg: -1)
+                    let currentDate : NSDate = self.pointsArray[self.pointsArray.count-1][2] as! NSDate
+                    let calendar: NSCalendar = NSCalendar.currentCalendar()
+                    let futureDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numLockedPoints-j), toDate: currentDate, options: nil)
+                    
+                    let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: futureDate!)
+                    
+                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: futureDate!, chlg: ["",""], cState: PointState.Locked,selChlg: -1)
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x+150, 11, 75, 50)
                     //newPoint.changeState(PointState.Locked)
-                    newPoint.UpdateDateLabel(99, dayL: 99, indexL: (self.pointsArray[self.pointsArray.count-1][1] as! Int)+numLockedPoints-j)
+                    newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL: (self.pointsArray[self.pointsArray.count-1][1] as! Int)+numLockedPoints-j)
                     self.timelineScroll.addSubview(newPoint)
                     
                     x-=75;
