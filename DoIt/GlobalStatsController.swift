@@ -38,8 +38,8 @@ class GlobalStatsController: UIViewController {
         
         let total = Double(nAccomplished1+nAccomplished2)
         
-        var percentage1:Double = 1
-        var percentage2:Double = 1
+        var percentage1:Double = 50
+        var percentage2:Double = 50
         
         if (total != 0){
          percentage1 = Double(nAccomplished1) / total * 100

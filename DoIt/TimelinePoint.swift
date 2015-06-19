@@ -26,6 +26,7 @@ class TimelinePoint : UIView {
     var button:UIButton!
     var month:UILabel!
     var day:UILabel!
+    var indexday:UILabel!
     
     private let unfineshedChallengeImg = UIImage(named:"active")
     private let finishedChallengeImg = UIImage(named:"done")
@@ -222,12 +223,14 @@ class TimelinePoint : UIView {
         }
     }
     
-    func UpdateDateLabel(monthL : Int, dayL : Int){
+    func UpdateDateLabel(monthL : Int, dayL : Int, indexL : Int){
         if (dayL == 99){
           day.text="?/?"
+          indexday.text=String(indexL)
         }
         else{
         day.text=NSString(format: "%d/%d", monthL,dayL) as String
+        indexday.text=String(indexL)
         }
        // month.text=monthL
     }
@@ -249,13 +252,22 @@ class TimelinePoint : UIView {
        // self.addSubview(monthLabel)
         //
         //
-        var dayLabel = UILabel(frame: CGRectMake(0, 0, 75, 50))
-        dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        var dayLabel = UILabel(frame: CGRectMake(0, 32, 75, 15))
+       // dayLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        dayLabel.font=UIFont.systemFontOfSize(11.0)
         dayLabel.textAlignment = NSTextAlignment.Center
         dayLabel.text = "30"
         dayLabel.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         day=dayLabel
         self.addSubview(dayLabel)
+        //
+        var indexLabel = UILabel(frame: CGRectMake(0, -3, 75, 50))
+        indexLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        indexLabel.textAlignment = NSTextAlignment.Center
+        indexLabel.text = "30"
+        indexLabel.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
+        indexday=indexLabel
+        self.addSubview(indexLabel)
         //
         self.hidden=false
     }
@@ -267,13 +279,16 @@ class TimelinePoint : UIView {
         switch currentState {
         case PointState.Locked:
             button.setImage(self.lockedChallengeImg, forState: UIControlState.Normal)
-            day.textColor=UIColor.whiteColor()
+            day.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
+            indexday.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         case PointState.Unfinished:
             button.setImage(self.unfineshedChallengeImg, forState: .Normal)
             day.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
+            indexday.textColor=UIColor(red: 52/255, green: 95/255, blue: 126/255, alpha: 1.0)
         case PointState.Finished:
             button.setImage(self.finishedChallengeImg, forState: .Normal)
             day.textColor=UIColor.whiteColor()
+            indexday.textColor=UIColor.whiteColor()
         default:
             button.setImage(self.lockedChallengeImg, forState: .Normal)
         }

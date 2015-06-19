@@ -110,7 +110,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x+150, 11, 75, 50)
                     //newPoint.changeState(PointState.Locked)
-                    newPoint.UpdateDateLabel(99, dayL: 99)
+                    newPoint.UpdateDateLabel(99, dayL: 99, indexL: (self.pointsArray[self.pointsArray.count-1][1] as! Int)+numLockedPoints-j)
                     self.timelineScroll.addSubview(newPoint)
                     
                     x-=75;
@@ -143,7 +143,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                     //let month:String = self.pointsArray[i-1][0] as! String
                     //let day:String = self.pointsArray[i-1][1] as! String
                     
-                    newPoint.UpdateDateLabel(components.month, dayL: components.day)
+                    newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL:self.pointsArray[i][1] as! Int)
                     x-=75;
                     
                     //Update complete challenge's number
@@ -220,6 +220,10 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor(red: 98/255, green: 185/255, blue: 246/255, alpha: 1.0)]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
         
         timer.invalidate()
     }
@@ -447,7 +451,13 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     func LoadPointData(popOverController : PopOverController, timelinePoint : TimelinePoint){
         
         let dayNumber = timelinePoint.getDay()
-        let langId = 0 //TODO: Definir o id do idioma aqui quando o suporte a multilinguas estiver implementado, 0=en 1=pt
+        var langId = -1
+        if(self.lg == "pt") {
+            langId = 1
+        }
+        else {
+            langId = 0
+        }
         let pointDate : NSDate = timelinePoint.getDate()
         
         // Check if it has updated point Data from server
