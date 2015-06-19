@@ -93,24 +93,32 @@ class GlobalStatsController: UIViewController {
         
         var globalStats = []
         if(changeChoice){
+//            
+//            ServerConnection.sharedInstance.ChallengeAccomplished(selectedChallenge, day: selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
+//                
+//                globalStats = arrayFromServer
+//                
+//                dispatch_async(dispatch_get_main_queue()){
+//                    self.UpdateGlobalStats(arrayFromServer)
+//                }
+//            })
+//            
             
-            ServerConnection.sharedInstance.ChallengeAccomplished(selectedChallenge, day: selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
-                
-                globalStats = arrayFromServer
-                
-                dispatch_async(dispatch_get_main_queue()){
-                    self.UpdateGlobalStats(arrayFromServer)
-                }
-            })
+            
+            var arrayFromServer = ServerConnection.sharedInstance.ChallengeAccomplishedSynchronous(selectedChallenge, day: selectedTimelinePoint.getDay())
+            self.UpdateGlobalStats(arrayFromServer)
 
         }else{
 
-            ServerConnection.sharedInstance.GetGlobalStats(selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
-                
-                dispatch_async(dispatch_get_main_queue()){
-                   self.UpdateGlobalStats(arrayFromServer)
-                }
-            })
+//            ServerConnection.sharedInstance.GetGlobalStats(selectedTimelinePoint.getDay(), completionHandler:{ (arrayFromServer: NSArray)->() in
+//                
+//                dispatch_async(dispatch_get_main_queue()){
+//                   self.UpdateGlobalStats(arrayFromServer)
+//                }
+//            })
+            
+            var arrayFromServer = ServerConnection.sharedInstance.GetGlobalStatsSynchronous(selectedTimelinePoint.getDay())
+            self.UpdateGlobalStats(arrayFromServer)
 
         }
         
