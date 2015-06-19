@@ -39,6 +39,8 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     
     var timer = NSTimer()
     
+    var currentDayNumber = 0
+    
     let lg = NSLocale.preferredLanguages()[0] as! String
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -239,6 +241,8 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         
         ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
             println(currentDate)
+            self.currentDayNumber = currentDayNumber
+            
             let cal = NSCalendar.currentCalendar()
             let components = cal.components((.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond), fromDate: currentDate)
             
@@ -472,9 +476,21 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         var langId = -1
         if(self.lg == "pt") {
             langId = 1
+            
+            if(dayNumber == currentDayNumber){
+                popOverController.lbTitle.text = "Desafios de hoje:"
+            }else{
+                popOverController.lbTitle.text = "Desafios do dia " + String(dayNumber)
+            }
         }
         else {
             langId = 0
+            
+            if(dayNumber == currentDayNumber){
+                popOverController.lbTitle.text = "Today Challenges:"
+            }else{
+                popOverController.lbTitle.text = "Day " + String(dayNumber) + " Challenges"
+            }
         }
         let pointDate : NSDate = timelinePoint.getDate()
         
