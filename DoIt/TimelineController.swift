@@ -320,59 +320,65 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         //GetServerCurrentDayNumberAndDate tem retorno duplo, um NSInteger e um NSDate
         ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
             
-            
-            let lastSavedDay = self.pointsArray[self.pointsArray.count-1][1] as! Int
-            
-            if(currentDayNumber == lastSavedDay) {
-                // Number of timelinePoints is up to date
-                println("timelinePoint array is up to date")
-                completionHandler()
+            // Check if connection failed
+            if currentDayNumber == -1 {
+                println("Connection failed")
             }
             else {
-                println("timelinePoint array is missing \(currentDayNumber - lastSavedDay) days")
                 
-                if(currentDayNumber - lastSavedDay < 0) {
-                    println("Error: Need to erase app before testing - more days in saved data then in server")
-                }
+                let lastSavedDay = self.pointsArray[self.pointsArray.count-1][1] as! Int
                 
-                
-                //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
-                var langId = -1
-                if(self.lg == "pt") {
-                    langId = 1
+                if(currentDayNumber == lastSavedDay) {
+                    // Number of timelinePoints is up to date
+                    println("timelinePoint array is up to date")
+                    completionHandler()
                 }
                 else {
-                    langId = 0
-                }
-                
-                ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
-                    let dayChallengesArray = arrayFromServer as! [String]
+                    println("timelinePoint array is missing \(currentDayNumber - lastSavedDay) days")
                     
-                    for var numDay = lastSavedDay; numDay < currentDayNumber; numDay++ {
-                        self.pointsArray.insertObject(NSMutableArray(), atIndex: numDay)
-                        self.pointsArray[numDay].insertObject(PointState.Unfinished.rawValue, atIndex: 0) // challengeState
-                        self.pointsArray[numDay].insertObject(numDay+1, atIndex: 1) // challengeGlobalDay
-                        
-                        
-                        let calendar : NSCalendar = NSCalendar.currentCalendar()
-                        let relativeDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numDay - (currentDayNumber-1)), toDate: currentDate, options: nil)
-                        self.pointsArray[numDay].insertObject(relativeDate!, atIndex: 2)
-                        
-                        if(numDay == currentDayNumber-1) {
-                            //pointsArray[numDay].insertObject(currentDate, atIndex: 2) // challengeDate
-                            self.pointsArray[numDay].insertObject(dayChallengesArray, atIndex: 3) // challengesArray
-                        }
-                        else {
-                            //pointsArray[numDay].insertObject(NSDate(), atIndex: 2) // challengeDate
-                            self.pointsArray[numDay].insertObject(["",""], atIndex: 3) // challengesArray
-                        }
-                        self.pointsArray[numDay].insertObject(-1, atIndex: 4) // selectedChallenge
-                        self.pointsArray[numDay].insertObject("emptyPic", atIndex: 5) // challengeCompletePicture
-                        self.pointsArray[numDay].insertObject("", atIndex: 6) // challengeCompleteText
-                        self.pointsArray[numDay].insertObject(0, atIndex: 7) // challengeShared
+                    if(currentDayNumber - lastSavedDay < 0) {
+                        println("Error: Need to erase app before testing - more days in saved data then in server")
                     }
-                    completionHandler()
-                })
+                    
+                    
+                    //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
+                    var langId = -1
+                    if(self.lg == "pt") {
+                        langId = 1
+                    }
+                    else {
+                        langId = 0
+                    }
+                    
+                    ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
+                        let dayChallengesArray = arrayFromServer as! [String]
+                        
+                        for var numDay = lastSavedDay; numDay < currentDayNumber; numDay++ {
+                            self.pointsArray.insertObject(NSMutableArray(), atIndex: numDay)
+                            self.pointsArray[numDay].insertObject(PointState.Unfinished.rawValue, atIndex: 0) // challengeState
+                            self.pointsArray[numDay].insertObject(numDay+1, atIndex: 1) // challengeGlobalDay
+                            
+                            
+                            let calendar : NSCalendar = NSCalendar.currentCalendar()
+                            let relativeDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numDay - (currentDayNumber-1)), toDate: currentDate, options: nil)
+                            self.pointsArray[numDay].insertObject(relativeDate!, atIndex: 2)
+                            
+                            if(numDay == currentDayNumber-1) {
+                                //pointsArray[numDay].insertObject(currentDate, atIndex: 2) // challengeDate
+                                self.pointsArray[numDay].insertObject(dayChallengesArray, atIndex: 3) // challengesArray
+                            }
+                            else {
+                                //pointsArray[numDay].insertObject(NSDate(), atIndex: 2) // challengeDate
+                                self.pointsArray[numDay].insertObject(["",""], atIndex: 3) // challengesArray
+                            }
+                            self.pointsArray[numDay].insertObject(-1, atIndex: 4) // selectedChallenge
+                            self.pointsArray[numDay].insertObject("emptyPic", atIndex: 5) // challengeCompletePicture
+                            self.pointsArray[numDay].insertObject("", atIndex: 6) // challengeCompleteText
+                            self.pointsArray[numDay].insertObject(0, atIndex: 7) // challengeShared
+                        }
+                        completionHandler()
+                    })
+                }
             }
         })
     }
