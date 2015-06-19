@@ -261,13 +261,13 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     func timerUpdate() {
 
         timersecond--
-        if (timersecond<=0){
+        if (timersecond<0){
             timersecond=59
             timerminute--
-            if (timerminute<=0){
+            if (timerminute<0){
                 timerminute=59
                 timerhour--
-                if (timerhour<=0){
+                if (timerhour<0){
                     timerhour=23
                     timerminute=59
                     timersecond=59
