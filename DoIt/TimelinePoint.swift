@@ -72,7 +72,7 @@ class TimelinePoint : UIView {
         selectedChallenge = selChlg
         
         
-        println("Point Created")
+        //println("Point Created")
         //self.backgroundColor=UIColor.redColor()
         self.createSubViews()
         updateState()

@@ -183,7 +183,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     func CenterTimelineAt(sender: AnyObject) {
         
         let frame = sender.convertPoint(sender.frame.origin, toView: timelineScroll)
-        println(frame.x)
+        //println(frame.x)
         let newOffset = CGPointMake(frame.x-(self.view.frame.size.width / 2)+35, 0);
         timelineScroll.setContentOffset(newOffset, animated: true)
     }
@@ -294,9 +294,14 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             }
             else {
                 println("hasSaved is true - Fetch Data")
-                self.pointsArray = self.defaults.objectForKey("pointsArray") as! NSMutableArray
                 
-                // TODO: check current day of server and add missing days from saved Data
+                if var savedData: NSData = self.defaults.objectForKey("pointsArray") as? NSData
+                {
+                    self.pointsArray = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as! NSMutableArray
+                }
+                //println("Non-Mutable: \(nonMutablePointsArray)")
+                //println("pointsArray: \(self.pointsArray)")
+                
                 // TODO: recover image string to image, if value is different then default "emptyPic"
                 addData({
                     self.saveData()
@@ -385,11 +390,12 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     
     func saveData() {
         // Save all data
-        defaults.setObject(pointsArray, forKey: "pointsArray")
+        //defaults.setObject(pointsArray, forKey: "pointsArray")
+        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(pointsArray), forKey: "pointsArray")
         defaults.setObject("true", forKey: "hasSaved")
         
         
-        println("Array: \(self.pointsArray)")
+        //println("Array: \(self.pointsArray)")
     }
     
     func createData(completionHandler: (() -> Void)!) {
@@ -475,7 +481,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         // Check if it has updated point Data from server
         popOverController.ShowLoadingIndicator(true)
         var dayChallengesArray = timelinePoint.getChallenges()
-        println("dayChallenges: \(dayChallengesArray)")
+        //println("dayChallenges: \(dayChallengesArray)")
         if(dayChallengesArray[0] == "") {
             //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
             ServerConnection.sharedInstance.GetChallenges(dayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
@@ -486,8 +492,10 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 //timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
                 
                 // Update array data and save it
+                println("will crash")
                 self.pointsArray[dayNumber-1].replaceObjectAtIndex(3, withObject: dayChallengesArray)
                 //self.pointsArray[dayNumber-1].insertObject(dayChallengesArray, atIndex: 3)
+                println("didn't crash - it's a miracle!")
                 self.saveData()
                 
                 self.showChallengePointData(popOverController, timelinePoint: timelinePoint, dayChallengesArray : dayChallengesArray)
