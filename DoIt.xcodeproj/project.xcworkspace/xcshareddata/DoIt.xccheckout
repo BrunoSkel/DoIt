@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>E33E23D7-4D5E-440E-984F-91FDB6160769</string>
 	<key>IDESourceControlProjectName</key>
-	<string>DoIt</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E52EAC03C0E85B68FADDCD16415CA38C76049C0D</key>
 		<string>https://github.com/BrunoSkel/DoIt.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DoIt.xcodeproj</string>
+	<string>DoIt.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E52EAC03C0E85B68FADDCD16415CA38C76049C0D</key>
