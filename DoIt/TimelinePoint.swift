@@ -222,8 +222,13 @@ class TimelinePoint : UIView {
         }
     }
     
-    func UpdateDateLabel(dayL : String){
-        day.text=dayL
+    func UpdateDateLabel(monthL : Int, dayL : Int){
+        if (dayL == 99){
+          day.text="?/?"
+        }
+        else{
+        day.text=NSString(format: "%d/%d", monthL,dayL) as String
+        }
        // month.text=monthL
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1514E95D1B3442FC00C1B800 /* DoItTableClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514E95C1B3442FC00C1B800 /* DoItTableClass.swift */; };
+		1514E95E1B3443D400C1B800 /* Damion-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */; };
 		151AB9931B2EE87E00017492 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AB9921B2EE87E00017492 /* XYPieChart.m */; };
 		151AB9951B2EE8BC00017492 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 151AB9941B2EE8BC00017492 /* QuartzCore.framework */; };
 		151AB9981B2EEABB00017492 /* PieChartWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AB9971B2EEABB00017492 /* PieChartWindow.m */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Damion-Regular.ttf"; sourceTree = "<group>"; };
+		1514E95C1B3442FC00C1B800 /* DoItTableClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoItTableClass.swift; sourceTree = "<group>"; };
 		151AB9911B2EE87E00017492 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		151AB9921B2EE87E00017492 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		151AB9941B2EE8BC00017492 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -94,6 +98,7 @@
 				76B2B8A91B28560A00644DA1 /* TimelineController.swift */,
 				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
 				CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */,
+				1514E95C1B3442FC00C1B800 /* DoItTableClass.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 				76B2B8A71B28560A00644DA1 /* AppDelegate.swift */,
 				76B2B8AB1B28560A00644DA1 /* Main.storyboard */,
 				151AB9961B2EEABB00017492 /* PieChartWindow.h */,
+				1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */,
 				151AB9971B2EEABB00017492 /* PieChartWindow.m */,
 				76B2B8AE1B28560A00644DA1 /* Images.xcassets */,
 				76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */,
@@ -250,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B2B8AD1B28560A00644DA1 /* Main.storyboard in Resources */,
+				1514E95E1B3443D400C1B800 /* Damion-Regular.ttf in Resources */,
 				76B2B8B21B28560A00644DA1 /* LaunchScreen.xib in Resources */,
 				76B2B8AF1B28560A00644DA1 /* Images.xcassets in Resources */,
 			);
@@ -274,6 +281,7 @@
 				1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */,
 				76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */,
 				151AB9981B2EEABB00017492 /* PieChartWindow.m in Sources */,
+				1514E95D1B3442FC00C1B800 /* DoItTableClass.swift in Sources */,
 				CBCE5F431B29CA9A005656FB /* ServerConnection.swift in Sources */,
 				CB0901BE1B2B2C2300EA4B44 /* GlobalStatsController.swift in Sources */,
 				151AB9931B2EE87E00017492 /* XYPieChart.m in Sources */,

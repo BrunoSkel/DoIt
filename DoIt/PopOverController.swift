@@ -81,15 +81,15 @@ class PopOverController: UIViewController {
         timelineViewController.isChangingChoice = true
         
 
-        timelinePoint.setSelectedChallenge(sender.tag)
-        timelinePoint.changeState(PointState.Finished)
+        //timelinePoint.setSelectedChallenge(sender.tag)
+        //timelinePoint.changeState(PointState.Finished)
         
         
-        delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: sender.tag)
+        //delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: sender.tag)
         
+                dismissViewControllerAnimated(false, completion: nil)
         
-        dismissViewControllerAnimated(false, completion: nil)
-        timelineViewController.performSegueWithIdentifier("GoToCompleteChallenge", sender: timelineViewController)
+        timelineViewController.performSegueWithIdentifier("GoToCompleteData", sender: sender)
     }
     
     @IBAction func SeeGlobalStats(sender: AnyObject) {
@@ -112,12 +112,15 @@ class PopOverController: UIViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+   /* override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if(segue.identifier == "GoToCompleteChallenge") {
+        if(segue.identifier == "GoToCompleteData") {
             let nextVC = (segue.destinationViewController as! ChallengeCompleteController)
             nextVC.timelinePoint = timelinePoint
+            println("aiu")
+            nextVC.timelineController = self
         }
-    }
+        
+    }*/
 }

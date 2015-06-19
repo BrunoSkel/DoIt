@@ -14,16 +14,18 @@ class ChallengeCompleteController: UIViewController {
     @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var bgAddImage: UIImageView!
     @IBOutlet weak var challengeCompletedTxt: UITextView!
-    
+    var timelineController : TimelineController!
     
     var timelinePoint : TimelinePoint!
     
     var delegateTimeline : TimelineDelegate? = nil
     
+    var challengeTag : Int = 99
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println(timelineController)
         // Do any additional setup after loading the view.
     }
 
@@ -32,6 +34,11 @@ class ChallengeCompleteController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func updateTimePoint(){
+        timelinePoint.setSelectedChallenge(challengeTag)
+        timelinePoint.changeState(PointState.Finished)
+        delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: challengeTag)
+    }
 
     
     @IBAction func addImage(sender: AnyObject) {
