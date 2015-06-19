@@ -60,25 +60,30 @@ class TimelinePoint : UIView {
     }
     */
     
-    init(frame: CGRect, cDay : Int, cDate : NSDate, chlg : [String]) {
+    init(frame: CGRect, cDay : Int, cDate : NSDate, chlg : [String], cState : PointState, selChlg : Int) {
         super.init(frame: frame)
         self.hidden = false
         
         currentDay = cDay
         currentDate = cDate
         challenge = chlg
-        selectedChallenge = -1
+        currentState = cState
+        selectedChallenge = selChlg
+        
         
         println("Point Created")
         //self.backgroundColor=UIColor.redColor()
         self.createSubViews()
+        updateState()
     }
     
-    func setInitialData(cDay : Int, cDate : NSDate, chlg : [String]) {
+    func setInitialData(cDay : Int, cDate : NSDate, chlg : [String], cState : PointState, selChlg : Int) {
         currentDay = cDay
         currentDate = cDate
         challenge = chlg
-        selectedChallenge = -1
+        currentState = cState
+        selectedChallenge = selChlg
+        updateState()
     }
     
     required init(coder decoder: NSCoder) {
@@ -135,6 +140,11 @@ class TimelinePoint : UIView {
     
     func setSelectedChallenge (id : Int) {
         selectedChallenge = id
+        updateState()
+    }
+    
+    func setChallenges (chlgs : [String]) {
+        challenge = chlgs
     }
     
     // MARK: - Getter Methods

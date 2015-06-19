@@ -106,10 +106,9 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 var numLockedPoints = 5
                 for var j=0; j<numLockedPoints; j++
                 {
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: NSDate(), chlg: ["",""])
+                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: NSDate(), chlg: ["",""], cState: PointState.Locked,selChlg: -1)
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x+150, 11, 75, 50)
-                    newPoint.changeState(PointState.Locked)
                     newPoint.UpdateDateLabel(String((self.pointsArray[self.pointsArray.count-1][1] as! Int)+(numLockedPoints-j)))
                     self.timelineScroll.addSubview(newPoint)
                     
@@ -130,7 +129,9 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                     let calendar: NSCalendar = NSCalendar.currentCalendar()
                     let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
                     
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: self.pointsArray[i][1] as! Int, cDate: date, chlg: self.pointsArray[i][3] as! [String])
+                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: self.pointsArray[i][1] as! Int, cDate: date, chlg: self.pointsArray[i][3] as! [String], cState: PointState(rawValue: (self.pointsArray[i][0] as! Int))!, selChlg: self.pointsArray[i][4] as! Int)
+                    //PointState(rawValue: decoder.decodeObjectForKey("currentState") as! Int)!
+                    //println("Point \(i): \(PointState(rawValue: (self.pointsArray[i][0] as! Int))!)")
                     //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x, 11, 75, 50)
@@ -276,7 +277,6 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 println("hasSaved is false - Create new Data")
                 createData({
                     
-                    println("Array: \(self.pointsArray)")
                     self.saveData()
                     completionHandler()
                 })
@@ -288,7 +288,6 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 // TODO: check current day of server and add missing days from saved Data
                 // TODO: recover image string to image, if value is different then default "emptyPic"
                 addData({
-                    println("Array: \(self.pointsArray)")
                     self.saveData()
                     completionHandler()
                 })
@@ -299,7 +298,6 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             println("hasSaved don't exist - Create new Data")
             
             createData({
-                println("Array: \(self.pointsArray)")
                 self.saveData()
                 completionHandler()
             })
@@ -372,6 +370,9 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         // Save all data
         defaults.setObject(pointsArray, forKey: "pointsArray")
         defaults.setObject("true", forKey: "hasSaved")
+        
+        
+        println("Array: \(self.pointsArray)")
     }
     
     func createData(completionHandler: (() -> Void)!) {
@@ -451,13 +452,15 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         // Check if it has updated point Data from server
         popOverController.ShowLoadingIndicator(true)
         var dayChallengesArray = timelinePoint.getChallenges()
+        println("dayChallenges: \(dayChallengesArray)")
         if(dayChallengesArray[0] == "") {
             //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
             ServerConnection.sharedInstance.GetChallenges(dayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
                 let dayChallengesArray = arrayFromServer as! [String]
                 
                 // Update timelinePoint data
-                timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
+                timelinePoint.setChallenges(dayChallengesArray)
+                //timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
                 
                 // Update array data and save it
                 self.pointsArray[dayNumber-1].replaceObjectAtIndex(3, withObject: dayChallengesArray)
@@ -468,7 +471,24 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             })
         }
         else {
-            showChallengePointData(popOverController, timelinePoint: timelinePoint, dayChallengesArray : dayChallengesArray)
+            // Challenge is already loaded
+            
+            // is challenge done?
+            switch timelinePoint.getState() {
+            case PointState.Unfinished:
+                println("Unfinished")
+                showChallengePointData(popOverController, timelinePoint: timelinePoint, dayChallengesArray : dayChallengesArray)
+            case PointState.Finished:
+                showCompleteChallengeData(popOverController, timelinePoint: timelinePoint)
+                println("Finished")
+            case PointState.Locked:
+                //Do nothing
+                println("Locked")
+                break
+            default:
+                println("Default")
+                showChallengePointData(popOverController, timelinePoint: timelinePoint, dayChallengesArray : dayChallengesArray)
+            }
         }
         
     }
@@ -479,14 +499,29 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         popOverController.timelineViewController = self
         popOverController.timelinePoint = timelinePoint
         
+        
         dispatch_async(dispatch_get_main_queue()){
             popOverController.challenge1.setTitle(dayChallengesArray[0], forState: .Normal)
             if(dayChallengesArray.count > 1) {
                 popOverController.challenge2.setTitle(dayChallengesArray[1], forState: .Normal)
             }
             popOverController.ShowLoadingIndicator(false)
+            popOverController.ShowChallenges()
         }
     }
+    
+    func showCompleteChallengeData (popOverController : PopOverController, timelinePoint : TimelinePoint) {
+        selectedTimelinePoint = timelinePoint
+        
+        popOverController.timelineViewController = self
+        popOverController.timelinePoint = timelinePoint
+        
+        //dispatch_async(dispatch_get_main_queue()){
+        popOverController.ShowLoadingIndicator(false)
+        popOverController.ShowChallengeComplete()
+        //}
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "GoToGlobalStats"){
@@ -494,6 +529,10 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             
             globalStatsController.selectedTimelinePoint = selectedTimelinePoint
             globalStatsController.changeChoice = isChangingChoice
+        }
+        else if(segue.identifier == "GoToCompleteChallenge") {
+            let nextVC = (segue.destinationViewController as! ChallengeCompleteController)
+            //nextVC.timelinePoint = timelinePoint
         }
     }
     
@@ -503,6 +542,11 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         // TODO: update data with selected choice. May send to server also
         
         pointsArray[pointDay-1].replaceObjectAtIndex(4, withObject: chosenChallenge)
+        pointsArray[pointDay-1].replaceObjectAtIndex(0, withObject: PointState.Finished.rawValue)
+        
+        doneChallengesInt++
+        self.doneChallengesLabel.text = String(self.doneChallengesInt)
+        
         saveData()
     }
     

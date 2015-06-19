@@ -14,10 +14,11 @@ class PopOverController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var challenge1: UIButton!
-
     @IBOutlet weak var challenge2: UIButton!
+    @IBOutlet weak var doneChallenge: UIButton!
     
     @IBOutlet weak var lbOr: UILabel!
+    @IBOutlet weak var lbTitle: UILabel!
     
     var timelineViewController : TimelineController!
     
@@ -28,6 +29,12 @@ class PopOverController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +46,7 @@ class PopOverController: UIViewController {
         lbOr.hidden = bool
         challenge1.hidden = bool
         challenge2.hidden = bool
+        doneChallenge.hidden = true
         
         activityIndicator.hidden = !bool
         
@@ -48,6 +56,25 @@ class PopOverController: UIViewController {
             activityIndicator.stopAnimating()
         }
     }
+    
+    func ShowChallenges() {
+        lbTitle.text = "Today, you could..."
+        lbOr.hidden = false
+        challenge1.hidden = false
+        challenge2.hidden = false
+        doneChallenge.hidden = true
+    }
+    
+    func ShowChallengeComplete() {
+        lbTitle.text = "You've completed today's challenge"
+        
+        lbOr.hidden = true
+        challenge1.hidden = true
+        challenge2.hidden = true
+        doneChallenge.hidden = false
+        doneChallenge.setTitle("Check your challenge info", forState: .Normal)
+        
+    }
 
     
     @IBAction func ChallengeAccomplished(sender: AnyObject) {
@@ -55,6 +82,7 @@ class PopOverController: UIViewController {
         
 
         timelinePoint.setSelectedChallenge(sender.tag)
+        timelinePoint.changeState(PointState.Finished)
         
         
         delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: sender.tag)
@@ -74,6 +102,10 @@ class PopOverController: UIViewController {
     @IBAction func CloseButton(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    @IBAction func ChangeCompleteStats(sender: AnyObject) {
         
     }
     
