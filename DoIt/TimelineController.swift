@@ -8,7 +8,15 @@
 
 import UIKit
 
-class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
+
+@objc protocol TimelineDelegate {
+    func updateSelectedChallenge(pointDay : Int, chosenChallenge : Int)
+    func updateChallengePicture(pointDay : Int, challengePic : UIImage)
+    func updateChallengeText(pointDay : Int, challengeTxt : String)
+}
+
+
+class TimelineController: UIViewController,UIPopoverPresentationControllerDelegate, TimelineDelegate {
     @IBOutlet var defaultTimelinebutton: TimelinePoint!
     
     @IBOutlet var doneChallengesLabel: UILabel!
@@ -30,6 +38,8 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
     var timersecond:Int = 0
     
     var timer = NSTimer()
+    
+    let lg = NSLocale.preferredLanguages()[0] as! String
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -159,6 +169,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                 self.doneChallengesLabel.text = String(self.doneChallengesInt)
             }
         })
+        //println(lg)
     }
 
     func CenterTimelineAt(sender: AnyObject) {
@@ -174,6 +185,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         let popOverController=self.storyboard!.instantiateViewControllerWithIdentifier("PopOverDefault") as! PopOverController
         popOverController.view.backgroundColor=UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         popOverController.modalPresentationStyle = .Popover
+        popOverController.delegateTimeline = self
         popOverController.preferredContentSize = CGSizeMake(self.view.frame.size.width-16, 400)
         
         let popOverPresentation = popOverController.popoverPresentationController
@@ -274,6 +286,7 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                 self.pointsArray = self.defaults.objectForKey("pointsArray") as! NSMutableArray
                 
                 // TODO: check current day of server and add missing days from saved Data
+                // TODO: recover image string to image, if value is different then default "emptyPic"
                 addData({
                     println("Array: \(self.pointsArray)")
                     self.saveData()
@@ -315,7 +328,14 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
                 
                 
                 //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
-                var langId = 1
+                var langId = -1
+                if(self.lg == "pt") {
+                    langId = 1
+                }
+                else {
+                    langId = 0
+                }
+                
                 ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
                     let dayChallengesArray = arrayFromServer as! [String]
                     
@@ -360,7 +380,13 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
             
             
             //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
-            var langId = 1
+            var langId = -1
+            if(self.lg == "pt") {
+                langId = 1
+            }
+            else {
+                langId = 0
+            }
             ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
                 let dayChallengesArray = arrayFromServer as! [String]
                 
@@ -471,6 +497,42 @@ class Timeline: UIViewController,UIPopoverPresentationControllerDelegate {
         }
     }
     
+    
+    // MARK: - Delegate functions
+    func updateSelectedChallenge(pointDay : Int, chosenChallenge : Int) {
+        // TODO: update data with selected choice. May send to server also
+        
+        pointsArray[pointDay-1].replaceObjectAtIndex(4, withObject: chosenChallenge)
+        saveData()
+    }
+    
+    
+    func updateChallengePicture(pointDay : Int, challengePic : UIImage) {
+        let imageData = UIImagePNGRepresentation(challengePic)
+        
+        /*
+        Save:
+        UIImage *contactImage = contactImageView.image;
+        NSData *imageData = UIImageJPEGRepresentation(contactImage, 100);
+        
+        Get:
+        NSData *imageData = [defaults dataForKey:@"image"];
+        UIImage *contactImage = [UIImage imageWithData:imageData];
 
+        */
+        
+        //let base64ImgString = imageData.base64EncodedStringWithOptions(.allZeros)
+        //encode.encodeObject(base64ImgString, forKey: "base64ImgString")
+        
+        // TODO: improve storing system for image, using local file system and saving path string on user defaults
+        
+        pointsArray[pointDay-1].replaceObjectAtIndex(5, withObject: imageData)
+        saveData()
+    }
+    
+    func updateChallengeText(pointDay : Int, challengeTxt : String) {
+        pointsArray[pointDay-1].replaceObjectAtIndex(6, withObject: challengeTxt)
+        saveData()
+    }
 }
 
