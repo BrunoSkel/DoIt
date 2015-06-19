@@ -45,6 +45,15 @@ class ServerConnection{
         }
     }
     
+    func ChallengeAccomplishedSynchronous(choice : NSInteger, day : NSInteger) -> NSArray{
+        //if(userid != "-1"){
+            var sendData : NSString = "userid=" + userid + "&day=" + day.description + "&choice=" + choice.description
+            
+            var strFromServer = SynchronousRequestPHP(sendData,phpFileName: "insertAccomplished.php", method: "POST")
+        
+        return split(strFromServer) {$0 == "#"}
+    }
+    
     func GetGlobalStats(day : NSInteger,completionHandler: NSArray -> ()){
         var sendData : NSString = "day=" + day.description
         RequestPHP(sendData,phpFileName: "getGlobalStat.php", method: "POST", completionHandler:{ (strFromServer: String)->() in
@@ -52,6 +61,12 @@ class ServerConnection{
             completionHandler(split(strFromServer) {$0 == "#"})
         })
         
+    }
+    
+    func GetGlobalStatsSynchronous(day : NSInteger) -> NSArray{
+        var sendData : NSString = "day=" + day.description
+        
+        return split(SynchronousRequestPHP(sendData,phpFileName: "getGlobalStat.php", method: "POST")) {$0 == "#"}
     }
     
     func GetServerCurrentDayNumberAndDate(completionHandler: (NSInteger,NSDate) -> ()){
@@ -109,5 +124,24 @@ class ServerConnection{
                 completionHandler(results as String)
             }
         })
+    }
+    
+    func SynchronousRequestPHP(sendData : NSString, phpFileName : String, method: String) -> String{
+        var request : NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: serverPath + phpFileName)!)
+        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
+        
+        request.HTTPBody = sendData.dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPMethod = method
+        
+        let queue:NSOperationQueue = NSOperationQueue()
+        
+        var response: NSURLResponse?
+        var error: NSError?
+        let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+
+        let results = NSString(data:urlData!, encoding:NSUTF8StringEncoding)
+        
+        return results as! String;
+        
     }
 }
