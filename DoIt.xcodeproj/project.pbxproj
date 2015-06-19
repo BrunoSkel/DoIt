@@ -94,6 +94,8 @@
 		762897421B33CA2D00FF3FC0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				151AB9961B2EEABB00017492 /* PieChartWindow.h */,
+				151AB9971B2EEABB00017492 /* PieChartWindow.m */,
 				762897401B339A1700FF3FC0 /* ChallengeCompleteController.swift */,
 				76B2B8A91B28560A00644DA1 /* TimelineController.swift */,
 				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
@@ -125,15 +127,13 @@
 		76B2B8A41B28560A00644DA1 /* DoIt */ = {
 			isa = PBXGroup;
 			children = (
-				762897421B33CA2D00FF3FC0 /* Controller */,
 				151AB9991B2EF13900017492 /* DoIt-Bridging-Header.h */,
+				762897421B33CA2D00FF3FC0 /* Controller */,
+				76DF3A1B1B34AC4700EDF99A /* Fonts */,
 				151AB9901B2EE87E00017492 /* XYPieChart */,
 				76B2B8C71B28574E00644DA1 /* Model */,
 				76B2B8A71B28560A00644DA1 /* AppDelegate.swift */,
 				76B2B8AB1B28560A00644DA1 /* Main.storyboard */,
-				151AB9961B2EEABB00017492 /* PieChartWindow.h */,
-				1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */,
-				151AB9971B2EEABB00017492 /* PieChartWindow.m */,
 				76B2B8AE1B28560A00644DA1 /* Images.xcassets */,
 				76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */,
 				76B2B8A51B28560A00644DA1 /* Supporting Files */,
@@ -173,6 +173,14 @@
 				76B2B8C81B28577400644DA1 /* TimelinePoint.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		76DF3A1B1B34AC4700EDF99A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
