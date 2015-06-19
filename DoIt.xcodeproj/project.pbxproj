@@ -11,8 +11,9 @@
 		151AB9951B2EE8BC00017492 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 151AB9941B2EE8BC00017492 /* QuartzCore.framework */; };
 		151AB9981B2EEABB00017492 /* PieChartWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AB9971B2EEABB00017492 /* PieChartWindow.m */; };
 		1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1581065D1B29A5DE0012D383 /* PopOverController.swift */; };
+		762897411B339A1700FF3FC0 /* ChallengeCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762897401B339A1700FF3FC0 /* ChallengeCompleteController.swift */; };
 		76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8A71B28560A00644DA1 /* AppDelegate.swift */; };
-		76B2B8AA1B28560A00644DA1 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8A91B28560A00644DA1 /* Timeline.swift */; };
+		76B2B8AA1B28560A00644DA1 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2B8A91B28560A00644DA1 /* TimelineController.swift */; };
 		76B2B8AD1B28560A00644DA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8AB1B28560A00644DA1 /* Main.storyboard */; };
 		76B2B8AF1B28560A00644DA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8AE1B28560A00644DA1 /* Images.xcassets */; };
 		76B2B8B21B28560A00644DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B2B8B01B28560A00644DA1 /* LaunchScreen.xib */; };
@@ -42,10 +43,11 @@
 		1581065D1B29A5DE0012D383 /* PopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverController.swift; sourceTree = "<group>"; };
 		15A286BD1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.strings; sourceTree = "<group>"; };
 		15A286BE1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		762897401B339A1700FF3FC0 /* ChallengeCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteController.swift; sourceTree = "<group>"; };
 		76B2B8A21B28560A00644DA1 /* DoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B2B8A61B28560A00644DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B2B8A71B28560A00644DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		76B2B8A91B28560A00644DA1 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		76B2B8A91B28560A00644DA1 /* TimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
 		76B2B8AC1B28560A00644DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76B2B8AE1B28560A00644DA1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		76B2B8B11B28560A00644DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -85,6 +87,17 @@
 			path = XYPieChart;
 			sourceTree = "<group>";
 		};
+		762897421B33CA2D00FF3FC0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				762897401B339A1700FF3FC0 /* ChallengeCompleteController.swift */,
+				76B2B8A91B28560A00644DA1 /* TimelineController.swift */,
+				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
+				CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		76B2B8991B28560A00644DA1 = {
 			isa = PBXGroup;
 			children = (
@@ -107,14 +120,12 @@
 		76B2B8A41B28560A00644DA1 /* DoIt */ = {
 			isa = PBXGroup;
 			children = (
+				762897421B33CA2D00FF3FC0 /* Controller */,
 				151AB9991B2EF13900017492 /* DoIt-Bridging-Header.h */,
 				151AB9901B2EE87E00017492 /* XYPieChart */,
 				76B2B8C71B28574E00644DA1 /* Model */,
 				76B2B8A71B28560A00644DA1 /* AppDelegate.swift */,
-				76B2B8A91B28560A00644DA1 /* Timeline.swift */,
 				76B2B8AB1B28560A00644DA1 /* Main.storyboard */,
-				1581065D1B29A5DE0012D383 /* PopOverController.swift */,
-				CB0901BD1B2B2C2300EA4B44 /* GlobalStatsController.swift */,
 				151AB9961B2EEABB00017492 /* PieChartWindow.h */,
 				151AB9971B2EEABB00017492 /* PieChartWindow.m */,
 				76B2B8AE1B28560A00644DA1 /* Images.xcassets */,
@@ -258,7 +269,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76B2B8AA1B28560A00644DA1 /* Timeline.swift in Sources */,
+				76B2B8AA1B28560A00644DA1 /* TimelineController.swift in Sources */,
+				762897411B339A1700FF3FC0 /* ChallengeCompleteController.swift in Sources */,
 				1581065E1B29A5DE0012D383 /* PopOverController.swift in Sources */,
 				76B2B8A81B28560A00644DA1 /* AppDelegate.swift in Sources */,
 				151AB9981B2EEABB00017492 /* PieChartWindow.m in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class PopOverController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -18,9 +19,11 @@ class PopOverController: UIViewController {
     
     @IBOutlet weak var lbOr: UILabel!
     
-    var timelineViewController : Timeline!
+    var timelineViewController : TimelineController!
     
     var timelinePoint : TimelinePoint!
+    
+    var delegateTimeline : TimelineDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +53,15 @@ class PopOverController: UIViewController {
     @IBAction func ChallengeAccomplished(sender: AnyObject) {
         timelineViewController.isChangingChoice = true
         
-        dismissViewControllerAnimated(false, completion: nil)
-        timelineViewController.performSegueWithIdentifier("GoToGlobalStats", sender: timelineViewController)
 
         timelinePoint.setSelectedChallenge(sender.tag)
+        
+        
+        delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: sender.tag)
+        
+        
+        dismissViewControllerAnimated(false, completion: nil)
+        timelineViewController.performSegueWithIdentifier("GoToCompleteChallenge", sender: timelineViewController)
     }
     
     @IBAction func SeeGlobalStats(sender: AnyObject) {
@@ -67,5 +75,17 @@ class PopOverController: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if(segue.identifier == "GoToCompleteChallenge") {
+            let nextVC = (segue.destinationViewController as! ChallengeCompleteController)
+            nextVC.timelinePoint = timelinePoint
+        }
     }
 }
