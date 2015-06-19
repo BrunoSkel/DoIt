@@ -14,7 +14,7 @@ class ChallengeCompleteController: UIViewController {
     @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var bgAddImage: UIImageView!
     @IBOutlet weak var challengeCompletedTxt: UITextView!
-    
+    var timelineController : TimelineController!
     
     var timelinePoint : TimelinePoint!
     
@@ -23,7 +23,7 @@ class ChallengeCompleteController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println(timelineController)
         // Do any additional setup after loading the view.
     }
 

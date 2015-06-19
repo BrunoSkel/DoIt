@@ -110,7 +110,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                     // newPoint = defaultTimelinebutton
                     newPoint.frame = CGRectMake(x+150, 11, 75, 50)
                     newPoint.changeState(PointState.Locked)
-                    newPoint.UpdateDateLabel(String((self.pointsArray[self.pointsArray.count-1][1] as! Int)+(numLockedPoints-j)))
+                    newPoint.UpdateDateLabel(99, dayL: 99)
                     self.timelineScroll.addSubview(newPoint)
                     
                     x-=75;
@@ -141,7 +141,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                     //let month:String = self.pointsArray[i-1][0] as! String
                     //let day:String = self.pointsArray[i-1][1] as! String
                     
-                    newPoint.UpdateDateLabel(String(self.pointsArray[i][1] as! Int))
+                    newPoint.UpdateDateLabel(components.month, dayL: components.day)
                     x-=75;
                     
                     //Update complete challenge's number
@@ -494,6 +494,10 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             
             globalStatsController.selectedTimelinePoint = selectedTimelinePoint
             globalStatsController.changeChoice = isChangingChoice
+        }
+        if(segue.identifier == "GoToCompleteData") {
+            let nextVC = (segue.destinationViewController as! ChallengeCompleteController)
+            nextVC.timelineController = self
         }
     }
     
