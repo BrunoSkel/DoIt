@@ -625,6 +625,7 @@
                         <outlet property="challenge2" destination="HSF-yW-OtO" id="D4N-eV-KE1"/>
                         <outlet property="doneChallenge" destination="1O3-kW-KmT" id="zf1-Ku-ml0"/>
                         <outlet property="lbOr" destination="RRl-Ir-qjD" id="lwU-h6-bpo"/>
+                        <outlet property="statsBtn" destination="hT3-My-Df0" id="1Ni-QP-xHk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyM-Bg-4un" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -16,6 +16,7 @@ class PopOverController: UIViewController {
     @IBOutlet weak var challenge1: UIButton!
     @IBOutlet weak var challenge2: UIButton!
     @IBOutlet weak var doneChallenge: UIButton!
+    @IBOutlet weak var statsBtn: UIButton!
     
     @IBOutlet weak var lbOr: UILabel!
     @IBOutlet weak var lbTitle: UILabel!
@@ -46,6 +47,7 @@ class PopOverController: UIViewController {
         lbOr.hidden = bool
         challenge1.hidden = bool
         challenge2.hidden = bool
+        statsBtn.hidden = bool
         doneChallenge.hidden = true
         
         activityIndicator.hidden = !bool
