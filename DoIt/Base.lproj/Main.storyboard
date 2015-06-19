@@ -38,16 +38,16 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCH-HM-ikk">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="06/19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up4-FR-mbW">
+                                        <rect key="frame" x="0.0" y="34" width="75" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JAN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4C-dk-0Ae">
-                                        <rect key="frame" x="6" y="8" width="33" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                        <color key="textColor" red="0.99797521720000004" green="1" blue="0.97651590749999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCH-HM-ikk">
+                                        <rect key="frame" x="0.0" y="-3" width="75" height="50"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -308,7 +308,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guest" translatesAutoresizingMaskIntoConstraints="NO" id="HfC-cI-fqI">
                                         <rect key="frame" x="97" y="251" width="40" height="40"/>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="I did it!" translatesAutoresizingMaskIntoConstraints="NO" id="EZN-As-FKv">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="I did it!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZN-As-FKv">
                                         <rect key="frame" x="97" y="299" width="215" height="78"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -346,6 +346,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="750"/>
                     <connections>
+                        <outlet property="textView" destination="EZN-As-FKv" id="6Fz-ZV-D5D"/>
                         <segue destination="gUA-KJ-t03" kind="push" id="vj6-Tm-es1"/>
                     </connections>
                 </viewController>
@@ -601,7 +602,6 @@
                         <outlet property="challenge2" destination="HSF-yW-OtO" id="D4N-eV-KE1"/>
                         <outlet property="doneChallenge" destination="1O3-kW-KmT" id="zf1-Ku-ml0"/>
                         <outlet property="lbOr" destination="RRl-Ir-qjD" id="lwU-h6-bpo"/>
-                        <outlet property="lbTitle" destination="lob-wg-o1b" id="z8L-CF-2Ad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyM-Bg-4un" userLabel="First Responder" sceneMemberID="firstResponder"/>

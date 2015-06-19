@@ -58,7 +58,7 @@ class PopOverController: UIViewController {
     }
     
     func ShowChallenges() {
-        lbTitle.text = "Today, you could..."
+       // lbTitle.text = "Today, you could..."
         lbOr.hidden = false
         challenge1.hidden = false
         challenge2.hidden = false
@@ -66,7 +66,7 @@ class PopOverController: UIViewController {
     }
     
     func ShowChallengeComplete() {
-        lbTitle.text = "You've completed today's challenge"
+       // lbTitle.text = "You've completed today's challenge"
         
         lbOr.hidden = true
         challenge1.hidden = true

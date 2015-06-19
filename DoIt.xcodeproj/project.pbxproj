@@ -38,6 +38,7 @@
 /* Begin PBXFileReference section */
 		1514E95B1B3440A400C1B800 /* Damion-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Damion-Regular.ttf"; sourceTree = "<group>"; };
 		1514E95C1B3442FC00C1B800 /* DoItTableClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoItTableClass.swift; sourceTree = "<group>"; };
+		1514E9601B345CC700C1B800 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.strings; sourceTree = "<group>"; };
 		151AB9911B2EE87E00017492 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		151AB9921B2EE87E00017492 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		151AB9941B2EE8BC00017492 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -45,7 +46,6 @@
 		151AB9971B2EEABB00017492 /* PieChartWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartWindow.m; sourceTree = "<group>"; };
 		151AB9991B2EF13900017492 /* DoIt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoIt-Bridging-Header.h"; sourceTree = "<group>"; };
 		1581065D1B29A5DE0012D383 /* PopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverController.swift; sourceTree = "<group>"; };
-		15A286BD1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.strings; sourceTree = "<group>"; };
 		15A286BE1B304A270062A910 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		762897401B339A1700FF3FC0 /* ChallengeCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCompleteController.swift; sourceTree = "<group>"; };
 		76B2B8A21B28560A00644DA1 /* DoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,7 +312,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				76B2B8AC1B28560A00644DA1 /* Base */,
-				15A286BD1B304A270062A910 /* pt */,
+				1514E9601B345CC700C1B800 /* pt */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
