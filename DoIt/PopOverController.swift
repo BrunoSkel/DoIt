@@ -72,7 +72,6 @@ class PopOverController: UIViewController {
         challenge1.hidden = true
         challenge2.hidden = true
         doneChallenge.hidden = false
-        doneChallenge.setTitle("Check your challenge info", forState: .Normal)
         
     }
 

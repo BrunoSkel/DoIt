@@ -22,15 +22,8 @@ class ChallengeCompleteController: UIViewController {
     
     var challengeTag : Int = 99
     
-    @IBOutlet weak var textView: UITextView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TEXTVIEW BUG FIXER
-        let lg = NSLocale.preferredLanguages()[0] as! String
-        if(lg == "pt") {
-            self.textView.text = "Eu consegui!"
-        }
         // Do any additional setup after loading the view.
     }
 
