@@ -185,7 +185,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     @IBAction func timelineButTouched(sender: AnyObject) {
         //Show PopOver
         let popOverController=self.storyboard!.instantiateViewControllerWithIdentifier("PopOverDefault") as! PopOverController
-        popOverController.view.backgroundColor=UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        popOverController.view.backgroundColor=UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         popOverController.modalPresentationStyle = .Popover
         popOverController.delegateTimeline = self
         popOverController.preferredContentSize = CGSizeMake(self.view.frame.size.width-16, 400)
