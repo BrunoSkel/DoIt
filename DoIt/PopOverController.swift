@@ -81,16 +81,21 @@ class PopOverController: UIViewController {
     @IBAction func ChallengeAccomplished(sender: AnyObject) {
         timelineViewController.isChangingChoice = true
         
-
+        
         //timelinePoint.setSelectedChallenge(sender.tag)
         //timelinePoint.changeState(PointState.Finished)
         
         
         //delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: sender.tag)
-        
-                dismissViewControllerAnimated(false, completion: nil)
-        
-        timelineViewController.performSegueWithIdentifier("GoToCompleteData", sender: sender)
+        if sender.tag == -1 {
+            // TODO: treat case where you click to check your challenge info that was saved
+        }
+        else {
+            
+            dismissViewControllerAnimated(false, completion: nil)
+            
+            timelineViewController.performSegueWithIdentifier("GoToCompleteData", sender: sender)
+        }
     }
     
     @IBAction func SeeGlobalStats(sender: AnyObject) {
