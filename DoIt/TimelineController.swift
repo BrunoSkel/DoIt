@@ -22,6 +22,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     @IBOutlet var doneChallengesLabel: UILabel!
     
     @IBOutlet var timerLabel: UILabel!
+    @IBOutlet weak var timelineHelpLabel: UILabel!
     
     var timelineView : UIView!
     var timelineScroll : UIScrollView!
@@ -77,106 +78,133 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     }
     
     func loadTimeLineData(){
-        //TODO: Pull data from the server. Loading fake data for now
         
         //Supposed server array ordenation: 1stday-2ndday-3rdday and it goes
-        loadData({
+        loadData({( currentDayNumber : NSInteger)->() in
+            
             dispatch_async(dispatch_get_main_queue()){
-                //Making points=========
-                self.doneChallengesInt=0
-                let screenSize: CGRect = UIScreen.mainScreen().bounds
-                //  var x:CGFloat=screenSize.width/2-20
-                let y:CGFloat=screenSize.height-60
                 
-                let scrollInitialX:CGFloat = self.view.frame.width
-                let pointsNumber = CGFloat(self.pointsArray.count)
-                let scrollWidth = ((self.defaultTimelinebutton.frame.width)*(pointsNumber+3))
-                self.timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
-                var x:CGFloat=scrollWidth-self.defaultTimelinebutton.frame.width
-                
-                self.timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
-                
-                
-                self.timelineView.addSubview(self.timelineScroll)
-                
-                
-                self.timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-10, 1, 1))
-                
-                self.timelineView.addSubview(self.timelineAnchor)
-                
-                //Create Locked points
-                var numLockedPoints = 5
-                for var j=0; j<numLockedPoints; j++
-                {
-                    let currentDate : NSDate = self.pointsArray[self.pointsArray.count-1][2] as! NSDate
-                    let calendar: NSCalendar = NSCalendar.currentCalendar()
-                    let futureDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numLockedPoints-j), toDate: currentDate, options: nil)
+                if currentDayNumber == -1 {
+                    var alert : UIAlertController
+                    var alertAction : UIAlertAction
                     
-                    let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: futureDate!)
+                    if(self.lg == "pt") {
+                        self.timelineHelpLabel.text = "Sem internet - Não foi possível carregar os desafios"
+                        alert = UIAlertController(title: "Sem internet", message: "Não foi possível carregar os desafios", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertAction = UIAlertAction(title: "Tentar novamente", style: UIAlertActionStyle.Default) { action -> Void in
+                            self.loadTimeLineData()
+                        }
+                    }
+                    else {
+                        self.timelineHelpLabel.text = "No internet connection - Unable to load challenges"
+                        alert = UIAlertController(title: "No internet connection", message: "Unable to load challenges", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) { action -> Void in
+                            self.loadTimeLineData()
+                        }
+                    }
                     
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: futureDate!, chlg: ["",""], cState: PointState.Locked,selChlg: -1)
-                    // newPoint = defaultTimelinebutton
-                    newPoint.frame = CGRectMake(x+150, 11, 75, 50)
-                    //newPoint.changeState(PointState.Locked)
-                    newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL: (self.pointsArray[self.pointsArray.count-1][1] as! Int)+numLockedPoints-j)
-                    self.timelineScroll.addSubview(newPoint)
-                    
-                    x-=75;
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
                     
                 }
-                
-                //And the unlocked points
-                
-                x=scrollWidth-75 - (75*3) //5=locked points number
-                
-                //println(self.pointsArray.count)
-                
-                for var i=self.pointsArray.count-1; i>=0; i--
-                {
+                else {
+                    //Making points=========
+                    self.doneChallengesInt=0
+                    let screenSize: CGRect = UIScreen.mainScreen().bounds
+                    //  var x:CGFloat=screenSize.width/2-20
+                    let y:CGFloat=screenSize.height-60
                     
-                    let date : NSDate = self.pointsArray[i][2] as! NSDate
-                    let calendar: NSCalendar = NSCalendar.currentCalendar()
-                    let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let scrollInitialX:CGFloat = self.view.frame.width
+                    let pointsNumber = CGFloat(self.pointsArray.count)
+                    let scrollWidth = ((self.defaultTimelinebutton.frame.width)*(pointsNumber+3))
+                    self.timelineScroll = UIScrollView(frame: CGRectMake(0, y, self.view.frame.width, 120))
+                    var x:CGFloat=scrollWidth-self.defaultTimelinebutton.frame.width
                     
-                    var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: self.pointsArray[i][1] as! Int, cDate: date, chlg: self.pointsArray[i][3] as! [String], cState: PointState(rawValue: (self.pointsArray[i][0] as! Int))!, selChlg: self.pointsArray[i][4] as! Int)
-                    //PointState(rawValue: decoder.decodeObjectForKey("currentState") as! Int)!
-                    //println("Point \(i): \(PointState(rawValue: (self.pointsArray[i][0] as! Int))!)")
-                    //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
-                    // newPoint = defaultTimelinebutton
-                    newPoint.frame = CGRectMake(x, 11, 75, 50)
-                    //newPoint.changeState(PointState.Finished)
-                    self.timelineScroll.addSubview(newPoint)
-                    newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+                    self.timelineScroll.contentSize = CGSizeMake(scrollWidth, 120);
                     
-                    //let month:String = self.pointsArray[i-1][0] as! String
-                    //let day:String = self.pointsArray[i-1][1] as! String
                     
-                    newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL:self.pointsArray[i][1] as! Int)
-                    x-=75;
+                    self.timelineView.addSubview(self.timelineScroll)
                     
-                    //Update complete challenge's number
-                    if (newPoint.getState() == PointState.Finished){
+                    
+                    self.timelineAnchor = UIView(frame: CGRectMake(screenSize.width/2, y-10, 1, 1))
+                    
+                    self.timelineView.addSubview(self.timelineAnchor)
+                    
+                    //Create Locked points
+                    var numLockedPoints = 5
+                    for var j=0; j<numLockedPoints; j++
+                    {
+                        let currentDate : NSDate = self.pointsArray[self.pointsArray.count-1][2] as! NSDate
+                        let calendar: NSCalendar = NSCalendar.currentCalendar()
+                        let futureDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numLockedPoints-j), toDate: currentDate, options: nil)
                         
-                        self.doneChallengesInt++
+                        let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: futureDate!)
+                        
+                        var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(0, 0, 75, 50), cDay: j, cDate: futureDate!, chlg: ["",""], cState: PointState.Locked,selChlg: -1)
+                        // newPoint = defaultTimelinebutton
+                        newPoint.frame = CGRectMake(x+150, 11, 75, 50)
+                        //newPoint.changeState(PointState.Locked)
+                        newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL: (self.pointsArray[self.pointsArray.count-1][1] as! Int)+numLockedPoints-j)
+                        self.timelineScroll.addSubview(newPoint)
+                        
+                        x-=75;
                         
                     }
                     
-                    //Center onto the current day's button
-                    if (i == (self.pointsArray.count-1)){
-                        self.CenterTimelineAt(newPoint.button)
+                    //And the unlocked points
+                    
+                    x=scrollWidth-75 - (75*3) //5=locked points number
+                    
+                    //println(self.pointsArray.count)
+                    
+                    for var i=self.pointsArray.count-1; i>=0; i--
+                    {
+                        
+                        let date : NSDate = self.pointsArray[i][2] as! NSDate
+                        let calendar: NSCalendar = NSCalendar.currentCalendar()
+                        let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                        
+                        var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 50, 75, 50), cDay: self.pointsArray[i][1] as! Int, cDate: date, chlg: self.pointsArray[i][3] as! [String], cState: PointState(rawValue: (self.pointsArray[i][0] as! Int))!, selChlg: self.pointsArray[i][4] as! Int)
+                        //PointState(rawValue: decoder.decodeObjectForKey("currentState") as! Int)!
+                        //println("Point \(i): \(PointState(rawValue: (self.pointsArray[i][0] as! Int))!)")
+                        //var newPoint:TimelinePoint = TimelinePoint(frame: CGRectMake(90, 40, 45, 45))
+                        // newPoint = defaultTimelinebutton
+                        newPoint.frame = CGRectMake(x, 11, 75, 50)
+                        //newPoint.changeState(PointState.Finished)
+                        self.timelineScroll.addSubview(newPoint)
+                        newPoint.button.addTarget(self, action: "timelineButTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+                        
+                        //let month:String = self.pointsArray[i-1][0] as! String
+                        //let day:String = self.pointsArray[i-1][1] as! String
+                        
+                        newPoint.UpdateDateLabel(components.month, dayL: components.day, indexL:self.pointsArray[i][1] as! Int)
+                        x-=75;
+                        
+                        //Update complete challenge's number
                         if (newPoint.getState() == PointState.Finished){
+                            
+                            self.doneChallengesInt++
+                            
                         }
-                            //!= not working?
-                        else{
-                            self.timelineButTouched(newPoint.button)
+                        
+                        //Center onto the current day's button
+                        if (i == (self.pointsArray.count-1)){
+                            self.CenterTimelineAt(newPoint.button)
+                            if (newPoint.getState() == PointState.Finished){
+                            }
+                                //!= not working?
+                            else{
+                                self.timelineButTouched(newPoint.button)
+                            }
                         }
+                        
                     }
+                    //=======================
                     
+                    self.defaultTimelinebutton.hidden=true
+                    self.doneChallengesLabel.text = String(self.doneChallengesInt)
                 }
-                //=======================
                 
-                self.defaultTimelinebutton.hidden=true
-                self.doneChallengesLabel.text = String(self.doneChallengesInt)
             }
         })
         //println(lg)
@@ -284,16 +312,20 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
     }
     
     
-    func loadData(completionHandler: (() -> Void)) {
+    func loadData(completionHandler: (NSInteger) -> ()) {
         //check if there is any saved Data
         if var hasSaved = defaults.stringForKey("hasSaved") as String! {
             // has saved, get data
             if(hasSaved == "false") {
                 println("hasSaved is false - Create new Data")
-                createData({
-                    
-                    self.saveData()
-                    completionHandler()
+                createData({ (currentDayNumber : NSInteger)->() in
+                    if currentDayNumber == -1 {
+                        completionHandler(currentDayNumber)
+                    }
+                    else {
+                        self.saveData()
+                        completionHandler(currentDayNumber)
+                    }
                 })
             }
             else {
@@ -307,9 +339,14 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 //println("pointsArray: \(self.pointsArray)")
                 
                 // TODO: recover image string to image, if value is different then default "emptyPic"
-                addData({
-                    self.saveData()
-                    completionHandler()
+                addData({ (currentDayNumber : NSInteger)->() in
+                    if currentDayNumber == -1 {
+                        completionHandler(currentDayNumber)
+                    }
+                    else {
+                        self.saveData()
+                        completionHandler(currentDayNumber)
+                    }
                 })
             }
         }
@@ -317,21 +354,27 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
             // haven't saved yet, need to create objects
             println("hasSaved don't exist - Create new Data")
             
-            createData({
-                self.saveData()
-                completionHandler()
+            createData({ (currentDayNumber : NSInteger)->() in
+                if currentDayNumber == -1 {
+                    completionHandler(currentDayNumber)
+                }
+                else {
+                    self.saveData()
+                    completionHandler(currentDayNumber)
+                }
             })
         }
         
     }
     
-    func addData(completionHandler: (() -> Void)!) {
+    func addData(completionHandler: NSInteger -> ()) {
         //GetServerCurrentDayNumberAndDate tem retorno duplo, um NSInteger e um NSDate
         ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
             
             // Check if connection failed
             if currentDayNumber == -1 {
                 println("Connection failed")
+                completionHandler(currentDayNumber)
             }
             else {
                 
@@ -340,7 +383,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 if(currentDayNumber == lastSavedDay) {
                     // Number of timelinePoints is up to date
                     println("timelinePoint array is up to date")
-                    completionHandler()
+                    completionHandler(currentDayNumber)
                 }
                 else {
                     println("timelinePoint array is missing \(currentDayNumber - lastSavedDay) days")
@@ -385,7 +428,7 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                             self.pointsArray[numDay].insertObject("", atIndex: 6) // challengeCompleteText
                             self.pointsArray[numDay].insertObject(0, atIndex: 7) // challengeShared
                         }
-                        completionHandler()
+                        completionHandler(currentDayNumber)
                     })
                 }
             }
@@ -402,50 +445,54 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
         //println("Array: \(self.pointsArray)")
     }
     
-    func createData(completionHandler: (() -> Void)!) {
+    func createData(completionHandler: NSInteger -> Void) {
         //GetServerCurrentDayNumberAndDate tem retorno duplo, um NSInteger e um NSDate
         ServerConnection.sharedInstance.GetServerCurrentDayNumberAndDate({ (currentDayNumber : NSInteger,currentDate: NSDate)->() in
             
-            
-            //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
-            var langId = -1
-            if(self.lg == "pt") {
-                langId = 1
+            if(currentDayNumber == -1) {
+                completionHandler(currentDayNumber)
             }
             else {
-                langId = 0
-            }
-            ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
-                let dayChallengesArray = arrayFromServer as! [String]
-                
-                self.pointsArray = NSMutableArray()
-                for var numDay=0; numDay < currentDayNumber; numDay++ {
-                    self.pointsArray.insertObject(NSMutableArray(), atIndex: numDay)
-                    self.pointsArray[numDay].insertObject(PointState.Unfinished.rawValue, atIndex: 0) // challengeState
-                    self.pointsArray[numDay].insertObject(numDay+1, atIndex: 1) // challengeGlobalDay
-                    
-                    
-                    let calendar : NSCalendar = NSCalendar.currentCalendar()
-                    let relativeDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numDay - (currentDayNumber-1)), toDate: currentDate, options: nil)
-                    self.pointsArray[numDay].insertObject(relativeDate!, atIndex: 2)
-                    
-                    if(numDay == currentDayNumber-1) {
-                        //pointsArray[numDay].insertObject(currentDate, atIndex: 2) // challengeDate
-                        self.pointsArray[numDay].insertObject(dayChallengesArray, atIndex: 3) // challengesArray
-                    }
-                    else {
-                        //pointsArray[numDay].insertObject(NSDate(), atIndex: 2) // challengeDate
-                        self.pointsArray[numDay].insertObject(["",""], atIndex: 3) // challengesArray
-                    }
-                    self.pointsArray[numDay].insertObject(-1, atIndex: 4) // selectedChallenge
-                    self.pointsArray[numDay].insertObject("emptyPic", atIndex: 5) // challengeCompletePicture
-                    self.pointsArray[numDay].insertObject("", atIndex: 6) // challengeCompleteText
-                    self.pointsArray[numDay].insertObject(0, atIndex: 7) // challengeShared
-                    
-                    
+                //Load a day challenge GetChallenges(dayNumber, langId 0=en, 1=pt)
+                var langId = -1
+                if(self.lg == "pt") {
+                    langId = 1
                 }
-                completionHandler()
-            })
+                else {
+                    langId = 0
+                }
+                ServerConnection.sharedInstance.GetChallenges(currentDayNumber,lang: langId, completionHandler:{ (arrayFromServer: NSArray)->() in
+                    let dayChallengesArray = arrayFromServer as! [String]
+                    
+                    self.pointsArray = NSMutableArray()
+                    for var numDay=0; numDay < currentDayNumber; numDay++ {
+                        self.pointsArray.insertObject(NSMutableArray(), atIndex: numDay)
+                        self.pointsArray[numDay].insertObject(PointState.Unfinished.rawValue, atIndex: 0) // challengeState
+                        self.pointsArray[numDay].insertObject(numDay+1, atIndex: 1) // challengeGlobalDay
+                        
+                        
+                        let calendar : NSCalendar = NSCalendar.currentCalendar()
+                        let relativeDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: (numDay - (currentDayNumber-1)), toDate: currentDate, options: nil)
+                        self.pointsArray[numDay].insertObject(relativeDate!, atIndex: 2)
+                        
+                        if(numDay == currentDayNumber-1) {
+                            //pointsArray[numDay].insertObject(currentDate, atIndex: 2) // challengeDate
+                            self.pointsArray[numDay].insertObject(dayChallengesArray, atIndex: 3) // challengesArray
+                        }
+                        else {
+                            //pointsArray[numDay].insertObject(NSDate(), atIndex: 2) // challengeDate
+                            self.pointsArray[numDay].insertObject(["",""], atIndex: 3) // challengesArray
+                        }
+                        self.pointsArray[numDay].insertObject(-1, atIndex: 4) // selectedChallenge
+                        self.pointsArray[numDay].insertObject("emptyPic", atIndex: 5) // challengeCompletePicture
+                        self.pointsArray[numDay].insertObject("", atIndex: 6) // challengeCompleteText
+                        self.pointsArray[numDay].insertObject(0, atIndex: 7) // challengeShared
+                        
+                        
+                    }
+                    completionHandler(currentDayNumber)
+                })
+            }
         })
     }
     
@@ -508,10 +555,10 @@ class TimelineController: UIViewController,UIPopoverPresentationControllerDelega
                 //timelinePoint.setInitialData(dayNumber, cDate: pointDate, chlg: dayChallengesArray)
                 
                 // Update array data and save it
-                println("will crash")
+                //println("will crash")
                 self.pointsArray[dayNumber-1].replaceObjectAtIndex(3, withObject: dayChallengesArray)
                 //self.pointsArray[dayNumber-1].insertObject(dayChallengesArray, atIndex: 3)
-                println("didn't crash - it's a miracle!")
+                //println("didn't crash - it's a miracle!")
                 self.saveData()
                 
                 self.showChallengePointData(popOverController, timelinePoint: timelinePoint, dayChallengesArray : dayChallengesArray)

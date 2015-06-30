@@ -53,11 +53,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toque um dia para ver seu desafio." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJn-hm-0XF">
-                                <rect key="frame" x="33" y="483" width="255" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toque um dia para ver seu desafio." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJn-hm-0XF">
+                                <rect key="frame" x="16" y="464" width="288" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="255" id="SRs-3J-8LC"/>
-                                    <constraint firstAttribute="height" constant="21" id="ig4-Wg-rNc"/>
+                                    <constraint firstAttribute="height" constant="40" id="ig4-Wg-rNc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,10 +112,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="tJn-hm-0XF" secondAttribute="centerX" constant="-0.5" id="8sT-z5-TzL"/>
                             <constraint firstItem="g5V-tS-wz3" firstAttribute="top" secondItem="An1-OY-NL1" secondAttribute="bottom" constant="-1" id="CYd-jn-uCY"/>
                             <constraint firstItem="Lpx-DB-O7n" firstAttribute="top" secondItem="qdg-zR-UXt" secondAttribute="bottom" constant="40" id="Irz-dB-eJZ"/>
                             <constraint firstAttribute="centerX" secondItem="KlT-lk-6J3" secondAttribute="centerX" constant="-0.5" id="MZR-Fz-tZm"/>
+                            <constraint firstItem="tJn-hm-0XF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Q8a-HM-zvc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tJn-hm-0XF" secondAttribute="trailing" id="QcF-aL-eZu"/>
                             <constraint firstAttribute="centerY" secondItem="PPG-Dy-x1H" secondAttribute="centerY" constant="25.5" id="UNh-JH-CcL"/>
                             <constraint firstAttribute="centerX" secondItem="BTd-gE-NGU" secondAttribute="centerX" id="XtC-Cj-I3M"/>
                             <constraint firstAttribute="centerX" secondItem="An1-OY-NL1" secondAttribute="centerX" constant="-500" id="bJN-dy-XeR"/>
@@ -137,6 +137,7 @@
                     <connections>
                         <outlet property="defaultTimelinebutton" destination="Mqf-nE-2P5" id="yRX-I7-VvE"/>
                         <outlet property="doneChallengesLabel" destination="KlT-lk-6J3" id="waT-cd-PdI"/>
+                        <outlet property="timelineHelpLabel" destination="tJn-hm-0XF" id="SJ5-vl-d9h"/>
                         <outlet property="timerLabel" destination="BTd-gE-NGU" id="AqQ-ps-qk9"/>
                         <segue destination="gUA-KJ-t03" kind="push" identifier="GoToGlobalStats" id="tiv-Ld-Ojb"/>
                         <segue destination="oxz-s6-1vd" kind="push" identifier="GoToCompleteData" id="kEo-Ti-bgw"/>
@@ -332,7 +333,7 @@
                                             <constraint firstAttribute="width" constant="173" id="YQn-F2-dH1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -386,20 +387,20 @@
                         <viewControllerLayoutGuide type="bottom" id="KxX-uT-VmN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VOj-kO-XpO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="12/06/2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSo-cO-3tO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/06/2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSo-cO-3tO">
                                 <rect key="frame" x="88" y="70" width="144" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="0Ae-Kd-uka"/>
                                     <constraint firstAttribute="height" constant="41" id="IJN-Jb-JWX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BpC-Tw-Nie">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpC-Tw-Nie">
                                 <rect key="frame" x="10" y="117" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Bi5-gm-anc"/>
@@ -410,27 +411,27 @@
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meu desafio completo:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-aW-Xoa">
-                                <rect key="frame" x="2" y="636" width="317" height="27"/>
+                                <rect key="frame" x="2" y="454" width="317" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="Fr5-3o-45W"/>
                                     <constraint firstAttribute="width" constant="317" id="TYd-PS-KLn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você ainda não completou o desafio desse dia." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juD-hL-GKc">
-                                <rect key="frame" x="10" y="671" width="300" height="59"/>
+                                <rect key="frame" x="10" y="489" width="300" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="9vH-Mm-yHt"/>
                                     <constraint firstAttribute="width" constant="300" id="hhv-PU-WjE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fBR-CR-7jH">
-                                <rect key="frame" x="150" y="348" width="20" height="20"/>
+                                <rect key="frame" x="150" y="257" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
@@ -472,9 +473,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRl-Ir-qjD">
-                                <rect key="frame" x="138" y="179" width="24.5" height="20.5"/>
+                                <rect key="frame" x="138" y="179" width="25" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="IEQ-kx-klk" userLabel="DO_1">
@@ -569,7 +570,7 @@
                                     <constraint firstAttribute="height" constant="21" id="he0-fM-M0J"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aov-KA-GqU">
@@ -670,7 +671,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#Challenge_1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0b-z3-QpM">
                                 <rect key="frame" x="47" y="238" width="284" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaI-HM-iZ6" userLabel="Red">
@@ -692,7 +693,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#Challenge_2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWj-Xj-KWA" userLabel="#Challenge_2">
                                 <rect key="frame" x="47" y="259" width="284" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -723,6 +724,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="vj6-Tm-es1"/>
+        <segue reference="tiv-Ld-Ojb"/>
     </inferredMetricsTieBreakers>
 </document>

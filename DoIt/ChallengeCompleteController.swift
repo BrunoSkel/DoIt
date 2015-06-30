@@ -33,6 +33,7 @@ class ChallengeCompleteController: UIViewController {
     }
     
     func updateTimePoint(){
+        println("Update point \(timelinePoint.getDay()): \(challengeTag)")
         timelinePoint.setSelectedChallenge(challengeTag)
         timelinePoint.changeState(PointState.Finished)
         delegateTimeline!.updateSelectedChallenge(timelinePoint.getDay(),chosenChallenge: challengeTag)
